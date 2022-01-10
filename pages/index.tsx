@@ -14,16 +14,9 @@ const Page = () => {
       <Box display={{ md: "flex" }}>
         <Box flexGrow={1}>
           <Heading as="h2" variant="page-title">
-            Pomdoro Timer
+            here change
           </Heading>
-          <p>test text to put here</p>
         </Box>
-        <Box
-          flexShrink={0}
-          mt={{ base: 4, md: 0 }}
-          ml={{ md: 6 }}
-          align="center"
-        ></Box>
       </Box>
     </Container>
   )

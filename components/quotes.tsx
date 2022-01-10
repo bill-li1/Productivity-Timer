@@ -35,6 +35,7 @@ const Quote = () => {
         pb={5}
         textAlign="center"
         bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
+        boxShadow="md"
       >
         {quote.text}
       </Box>
@@ -53,7 +54,8 @@ const Quote = () => {
         transform="auto"
         translateY="-25%"
         translateX="-15%"
-        bg={useColorModeValue("#FFDDCD", "#5C4033")}
+        boxShadow="md"
+        bg={useColorModeValue("#FFDDCD", "#B69F8A")}
       >
         {quote.author}
       </Box>

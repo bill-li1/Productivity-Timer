@@ -1,52 +1,25 @@
 import Logo from "./logo"
-import NextLink from "next/link"
 import {
   Container,
   Box,
-  Link,
-  Stack,
   Heading,
   Flex,
-  Menu,
-  MenuItem,
-  MenuList,
-  MenuButton,
   IconButton,
   useColorModeValue,
 } from "@chakra-ui/react"
-import { HamburgerIcon, SettingsIcon } from "@chakra-ui/icons"
+import { BsGearFill } from "react-icons/bs"
+import { FaUserCircle } from "react-icons/fa"
+import { AiFillDatabase } from "react-icons/ai"
 import ThemeToggleButton from "./theme-toggle-button"
-import { IoLogoGithub } from "react-icons/io5"
-
-const LinkItem = ({ href, path, _target, children, ...props }) => {
-  const active = path === href
-  const inactiveColor = useColorModeValue("gray200", "whiteAlpha.900")
-
-  return (
-    <NextLink href={href} passHref>
-      <Link
-        p={2}
-        bg={active ? "grassTeal" : undefined}
-        color={active ? "#202023" : inactiveColor}
-        _target={_target}
-        {...props}
-      >
-        {children}
-      </Link>
-    </NextLink>
-  )
-}
 
 const Navbar = (props) => {
-  const { path } = props
-
   return (
     <Box
       position="fixed"
       as="nav"
       w="100%"
-      css={{ backdropFilter: "blur(15px)" }}
-      bg="#ffffff00"
+      css={{ backdropFilter: "blur(10px)" }}
+      bg={useColorModeValue("#f0e7db60", "#20202360")}
       zIndex={1}
       {...props}
     >
@@ -64,71 +37,32 @@ const Navbar = (props) => {
           </Heading>
         </Flex>
 
-        <Stack
-          direction={{ base: "column", md: "row" }}
-          display={{ base: "none", md: "flex" }}
-          width={{ base: "full", md: "auto" }}
-          alignItems="center"
-          flexGrow={1}
-          mt={{ base: 4, md: 0 }}
-        >
-          <LinkItem href="/works" path={path} _target="/works">
-            Works
-          </LinkItem>
-          <LinkItem href="/posts" path={path} _target="/posts">
-            Posts
-          </LinkItem>
-          <LinkItem
-            _target="_blank"
-            href="https://github.com/craftzdog/craftzdog-homepage"
-            path={path}
-            display="inline-flex"
-            alignItems="center"
-            style={{ gap: 4 }}
-            pl={2}
-          >
-            <IoLogoGithub />
-            Source
-          </LinkItem>
-        </Stack>
-
         <Box flex={1} align="right">
           <ThemeToggleButton />
           <IconButton
             aria-label="Settings"
             ml={3}
-            icon={<SettingsIcon />}
+            icon={<AiFillDatabase size={20} />}
             variant="outline"
+            borderColor="#80808070"
             bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
           />
-          <Box ml={3} display={{ base: "inline-block", md: "none" }}>
-            <Menu isLazy id="navbar-menu">
-              <MenuButton
-                as={IconButton}
-                bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
-                icon={<HamburgerIcon />}
-                variant="outline"
-                aria-label="Options"
-              />
-              <MenuList>
-                <NextLink href="/" passHref>
-                  <MenuItem as={Link}>Login</MenuItem>
-                </NextLink>
-                <NextLink href="/works" passHref>
-                  <MenuItem as={Link}>About</MenuItem>
-                </NextLink>
-                <NextLink href="/posts" passHref>
-                  <MenuItem as={Link}>Report</MenuItem>
-                </NextLink>
-                <MenuItem
-                  as={Link}
-                  href="https://github.com/craftzdog/craftzdog-homepage"
-                >
-                  View Source
-                </MenuItem>
-              </MenuList>
-            </Menu>
-          </Box>
+          <IconButton
+            aria-label="Settings"
+            ml={3}
+            icon={<BsGearFill size={20} />}
+            variant="outline"
+            borderColor="#80808070"
+            bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
+          />
+          <IconButton
+            aria-label="Settings"
+            ml={3}
+            icon={<FaUserCircle size={20} />}
+            variant="outline"
+            borderColor="#80808070"
+            bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
+          />
         </Box>
       </Container>
     </Box>
