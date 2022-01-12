@@ -1,24 +1,34 @@
 import Logo from "./logo"
 import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
   Container,
   Box,
   Heading,
   Flex,
   IconButton,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react"
 import { BsGearFill } from "react-icons/bs"
 import { FaUserCircle } from "react-icons/fa"
 import { AiFillDatabase } from "react-icons/ai"
+import Settings from "./settings"
+import { ITimerSettings } from "../util/types"
 import ThemeToggleButton from "./theme-toggle-button"
 
-const Navbar = (props) => {
+const Navbar = (props: NavProps) => {
+  const { timerSettings, setTimerSettings } = props
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
     <Box
       position="fixed"
       as="nav"
       w="100%"
-      css={{ backdropFilter: "blur(10px)" }}
       bg={useColorModeValue("#f0e7db60", "#20202360")}
       zIndex={1}
       {...props}
@@ -50,6 +60,7 @@ const Navbar = (props) => {
           <IconButton
             aria-label="Settings"
             ml={3}
+            onClick={onOpen}
             icon={<BsGearFill size={20} />}
             variant="outline"
             borderColor="#80808070"
@@ -64,9 +75,28 @@ const Navbar = (props) => {
             bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
           />
         </Box>
+        <Modal size="lg" isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader fontSize="34" textAlign="center">
+              Settings
+            </ModalHeader>
+            <ModalCloseButton />
+            <Settings
+              timerSettings={timerSettings}
+              setTimerSettings={setTimerSettings}
+              onClose={onClose}
+            />
+          </ModalContent>
+        </Modal>
       </Container>
     </Box>
   )
+}
+
+interface NavProps {
+  timerSettings: ITimerSettings
+  setTimerSettings: (newSettings: ITimerSettings) => void
 }
 
 export default Navbar
