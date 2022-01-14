@@ -18,7 +18,6 @@ import { FaUserCircle } from "react-icons/fa"
 import { AiFillDatabase } from "react-icons/ai"
 import Settings from "./settings"
 import { ITimerSettings } from "../util/types"
-import ThemeToggleButton from "./theme-toggle-button"
 
 const Navbar = (props: NavProps) => {
   const { timerSettings, setTimerSettings } = props
@@ -48,7 +47,6 @@ const Navbar = (props: NavProps) => {
         </Flex>
 
         <Box flex={1} align="right">
-          <ThemeToggleButton />
           <IconButton
             aria-label="Settings"
             ml={3}

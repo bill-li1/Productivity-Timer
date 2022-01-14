@@ -18,7 +18,7 @@ import {
 const ThemeSetting = (props: TimerSettingProps) => {
   const { timerSettings, setTimerSettings } = props
   return (
-    <Box display="flex" pl="20px">
+    <Box display="flex" pl="20px" mb="2">
       <Table variant="unstyled">
         <Thead>
           <Tr>

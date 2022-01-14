@@ -4,11 +4,12 @@ import { useState, useEffect } from "react"
 import { ITimerSettings } from "../util/types"
 import ThemeSetting from "./theme-setting"
 import TimerTypeSetting from "./timer-type-setting"
+import LongBreakSettings from "./long-break-settings"
 import TimerSettings from "./timer-setting"
 
 const StyledDivider = () => {
   return (
-    <Box ml="5" mr="5" mb="5">
+    <Box ml="5" mr="5" mb="2">
       <Divider />
     </Box>
   )
@@ -32,6 +33,8 @@ const Settings = (props: SettingsProps) => {
         timerSettings={newTimerSettings}
         setTimerSettings={setNewTimerSettings}
       />
+      <StyledDivider />
+      <LongBreakSettings />
       <StyledDivider />
       <ThemeSetting />
       <StyledDivider />
