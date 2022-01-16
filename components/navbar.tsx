@@ -73,7 +73,7 @@ const Navbar = (props: NavProps) => {
             bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
           />
         </Box>
-        <Modal size="lg" isOpen={isOpen} onClose={onClose}>
+        <Modal size="md" isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader fontSize="34" textAlign="center">

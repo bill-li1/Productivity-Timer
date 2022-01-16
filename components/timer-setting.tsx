@@ -18,12 +18,12 @@ import {
 const ThemeSetting = (props: TimerSettingProps) => {
   const { timerSettings, setTimerSettings } = props
   return (
-    <Box display="flex" pl="20px" mb="2">
+    <Box display="flex" pl="10px" mb="2">
       <Table variant="unstyled">
         <Thead>
           <Tr>
-            <Th fontSize="16">Timers</Th>
-            <Th fontSize="16" textAlign="center" pr="10" pl="16">
+            <Th fontSize="14">Timers</Th>
+            <Th fontSize="14" pr="0" pl="10" textAlign="center">
               Duration
             </Th>
             <Th fontSize="14" textAlign="center">
@@ -34,7 +34,7 @@ const ThemeSetting = (props: TimerSettingProps) => {
         <Tbody>
           <Tr>
             <Td>Pomdoro</Td>
-            <Td w="10%" pr="0" pl="16">
+            <Td pr="0" pl="10">
               <NumberInput
                 w="100px"
                 value={timerSettings.pomdoroTime}
@@ -72,7 +72,7 @@ const ThemeSetting = (props: TimerSettingProps) => {
           </Tr>
           <Tr>
             <Td pr="0">Short Break</Td>
-            <Td pr="0" pl="16">
+            <Td pr="0" pl="10">
               <NumberInput
                 w="100px"
                 value={timerSettings.shortBreakTime}
@@ -110,7 +110,7 @@ const ThemeSetting = (props: TimerSettingProps) => {
           </Tr>
           <Tr>
             <Td pr="0">Long Break</Td>
-            <Td pr="0" pl="16">
+            <Td pr="0" pl="10">
               <NumberInput
                 w="100px"
                 value={timerSettings.longBreaktime}

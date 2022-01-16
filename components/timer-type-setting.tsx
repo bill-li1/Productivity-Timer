@@ -1,28 +1,46 @@
-import { Box } from "@chakra-ui/react"
+import { Table, Thead, Th, Box, Button } from "@chakra-ui/react"
+import { BsSquareFill, BsCircleFill } from "react-icons/bs"
 
 const TimerTypeSetting = () => {
   return (
-    <Box mr="5" ml="5" mb="2" display="flex">
-      <Box w="50%" p="4">
+    <Box mt="3" mb="5">
+      <Table variant="unstyled">
+        <Thead>
+          <Th fontSize="16" textAlign="center" w="xl" pb="20px">
+            Timer Style
+          </Th>
+        </Thead>
+      </Table>
+      <Box mr="5" ml="5" mb="2" display="flex">
         <Box
-          borderRadius="2xl"
-          border="1px solid red"
-          pt="30%"
-          textAlign="center"
-          height="150px"
+          w="50%"
+          display="flex"
+          justifyContent="center"
+          alignContent="center"
         >
-          Circle Timer
+          <Button
+            size="lg"
+            aria-label="light toggle theme"
+            colorScheme="blue"
+            leftIcon={<BsCircleFill />}
+          >
+            Circle Timer
+          </Button>
         </Box>
-      </Box>
-      <Box w="50%" p="4">
         <Box
-          borderRadius="2xl"
-          pt="30%"
-          border="1px solid red"
-          textAlign="center"
-          height="150px"
+          w="50%"
+          display="flex"
+          justifyContent="center"
+          alignContent="center"
         >
-          Square Timer
+          <Button
+            size="lg"
+            aria-label="light toggle theme"
+            colorScheme="blue"
+            leftIcon={<BsSquareFill />}
+          >
+            Square Timer
+          </Button>
         </Box>
       </Box>
     </Box>

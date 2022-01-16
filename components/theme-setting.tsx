@@ -1,8 +1,18 @@
-import { Box } from "@chakra-ui/react"
-import { useColorMode, useColorModeValue } from "@chakra-ui/react"
+import {
+  Table,
+  Thead,
+  Th,
+  Box,
+  Button,
+  LightMode,
+  DarkMode,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react"
 import { useState, useEffect, useRef } from "react"
+import { SunIcon, MoonIcon } from "@chakra-ui/icons"
 
-const ThemeSetting = () => {
+const TimerTypeSetting = () => {
   const { toggleColorMode } = useColorMode()
   const [theme, setTheme] = useState<String>(useColorModeValue("light", "dark"))
   const notInitialRender = useRef(false)
@@ -16,31 +26,54 @@ const ThemeSetting = () => {
   }, [theme])
 
   return (
-    <Box mr="5" ml="5" mb="2" display="flex">
-      <Box w="50%" onClick={() => setTheme("light")} p="4">
+    <Box mt="3" mb="5">
+      <Table variant="unstyled">
+        <Thead>
+          <Th fontSize="18" textAlign="center" w="xl" pb="20px">
+            Theme
+          </Th>
+        </Thead>
+      </Table>
+      <Box mr="5" ml="5" mb="2" display="flex">
         <Box
-          borderRadius="2xl"
-          border="1px solid red"
-          pt="30%"
-          textAlign="center"
-          height="150px"
+          w="50%"
+          display="flex"
+          justifyContent="center"
+          alignContent="center"
         >
-          light theme
+          <DarkMode>
+            <Button
+              size="lg"
+              onClick={() => setTheme("light")}
+              aria-label="light toggle theme"
+              colorScheme="orange"
+              leftIcon={<SunIcon />}
+            >
+              Light Theme
+            </Button>
+          </DarkMode>
         </Box>
-      </Box>
-      <Box w="50%" onClick={() => setTheme("dark")} p="4">
         <Box
-          borderRadius="2xl"
-          pt="30%"
-          border="1px solid red"
-          textAlign="center"
-          height="150px"
+          w="50%"
+          display="flex"
+          justifyContent="center"
+          alignContent="center"
         >
-          dark theme
+          <LightMode>
+            <Button
+              size="lg"
+              onClick={() => setTheme("dark")}
+              aria-label="light toggle theme"
+              colorScheme="purple"
+              leftIcon={<MoonIcon />}
+            >
+              Dark Theme
+            </Button>
+          </LightMode>
         </Box>
       </Box>
     </Box>
   )
 }
 
-export default ThemeSetting
+export default TimerTypeSetting

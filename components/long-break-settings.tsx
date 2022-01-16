@@ -1,11 +1,7 @@
 import { Box } from "@chakra-ui/react"
 
 const LongBreakSetting = () => {
-  return (
-    <Box>
-      hi
-    </Box>
-  )
+  return <Box>test</Box>
 }
 
-export default LongBreakSetting 
+export default LongBreakSetting
