@@ -26,7 +26,7 @@ const TimerTypeSetting = () => {
   }, [theme])
 
   return (
-    <Box mt="3" mb="5">
+    <Box mt="3" mb="6">
       <Table variant="unstyled">
         <Thead>
           <Th fontSize="16" textAlign="center" w="xl" pb="20px">

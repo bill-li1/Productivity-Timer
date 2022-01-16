@@ -9,3 +9,7 @@ export interface ITimerSettings {
   circleTimer: boolean
 }
 
+export interface TimerSettingProps {
+  timerSettings: ITimerSettings
+  setTimerSettings: (newSettings: ITimerSettings) => void
+}

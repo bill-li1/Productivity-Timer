@@ -1,6 +1,11 @@
 import { Box } from "@chakra-ui/react"
-import { Button, Divider, ModalFooter } from "@chakra-ui/react"
-import { useState, useEffect } from "react"
+import {
+  Button,
+  Divider,
+  ModalFooter,
+  useColorModeValue,
+} from "@chakra-ui/react"
+import { useState } from "react"
 import { ITimerSettings } from "../util/types"
 import ThemeSetting from "./theme-setting"
 import TimerTypeSetting from "./timer-type-setting"
@@ -34,13 +39,25 @@ const Settings = (props: SettingsProps) => {
         setTimerSettings={setNewTimerSettings}
       />
       <StyledDivider />
-      <LongBreakSettings />
+      <LongBreakSettings
+        timerSettings={newTimerSettings}
+        setTimerSettings={setNewTimerSettings}
+      />
       <StyledDivider />
       <ThemeSetting />
       <StyledDivider />
       <TimerTypeSetting />
       <ModalFooter>
-        <Button colorScheme="blue" mr={3} onClick={saveButton}>
+        <Button
+          mr="3"
+          _hover={{}}
+          onClick={onClose}
+          bg={useColorModeValue("#808080", "#A9A9A9")}
+          textColor={useColorModeValue("white", "black")}
+        >
+          Cancel
+        </Button>
+        <Button mr="1" colorScheme="blue" onClick={saveButton}>
           Save
         </Button>
       </ModalFooter>

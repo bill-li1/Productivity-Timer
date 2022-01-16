@@ -1,4 +1,4 @@
-import { ITimerSettings } from "../util/types"
+import { TimerSettingProps } from "../util/types"
 import {
   Box,
   Table,
@@ -57,7 +57,14 @@ const ThemeSetting = (props: TimerSettingProps) => {
                 </NumberInputStepper>
               </NumberInput>
             </Td>
-            <Td display="flex" justifyContent="center" mr="15" pt="5" pb="0">
+            <Td
+              display="flex"
+              justifyContent="center"
+              mr="15"
+              pt="6"
+              pb="0"
+              pl="10"
+            >
               <Switch
                 size="lg"
                 checked={timerSettings.autoStartPomdoro}
@@ -95,7 +102,14 @@ const ThemeSetting = (props: TimerSettingProps) => {
                 </NumberInputStepper>
               </NumberInput>
             </Td>
-            <Td display="flex" justifyContent="center" mr="15" pt="5" pb="0">
+            <Td
+              display="flex"
+              justifyContent="center"
+              mr="15"
+              pt="6"
+              pb="0"
+              pl="10"
+            >
               <Switch
                 size="lg"
                 checked={timerSettings.autoStartShortTimer}
@@ -133,7 +147,14 @@ const ThemeSetting = (props: TimerSettingProps) => {
                 </NumberInputStepper>
               </NumberInput>
             </Td>
-            <Td display="flex" justifyContent="center" mr="15" pt="5" pb="0">
+            <Td
+              display="flex"
+              justifyContent="center"
+              mr="15"
+              pt="6"
+              pl="8"
+              pb="0"
+            >
               <Switch
                 size="lg"
                 checked={timerSettings.autoStartLongTimer}
@@ -150,11 +171,6 @@ const ThemeSetting = (props: TimerSettingProps) => {
       </Table>
     </Box>
   )
-}
-
-interface TimerSettingProps {
-  timerSettings: ITimerSettings
-  setTimerSettings: (newSettings: ITimerSettings) => void
 }
 
 export default ThemeSetting
