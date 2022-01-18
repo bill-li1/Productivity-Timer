@@ -3,22 +3,26 @@ import { useState } from "react"
 import Navbar from "../components/navbar"
 import Quote from "../components/quotes"
 import { ITimerSettings } from "../util/types"
-import SquareTimer from "../components/square-timer"
-import CircleTimer from "../components/circle-timer"
+import Timer from "../components/timer/timer"
 
 const Page = () => {
   const initialTimerSettings: ITimerSettings = {
-    pomdoroTime: 45,
+    pomodoroTime: 45,
     shortBreakTime: 5,
-    longBreaktime: 10,
+    longBreakTime: 10,
     numBreaks: 3,
-    autoStartPomdoro: false,
+    autoStartPomodoro: false,
     autoStartShortTimer: false,
     autoStartLongTimer: false,
+    pomodoroColor: "#808080",
+    shortBreakColor: "#808080",
+    longBreakColor: "#808080",
     circleTimer: false,
   }
+
   const [timerSettings, setTimerSettings] =
     useState<ITimerSettings>(initialTimerSettings)
+
   return (
     <Box>
       <Navbar
@@ -29,8 +33,10 @@ const Page = () => {
         <Heading as="h2" variant="page-title" mb={5}>
           Rebecca's Timer
         </Heading>
-        <CircleTimer timerSettings={timerSettings} />
-        <SquareTimer timerSettings={timerSettings} />
+        <Timer
+          timerSettings={timerSettings}
+          setTimerSettings={setTimerSettings}
+        />
         <Quote />
       </Container>
     </Box>

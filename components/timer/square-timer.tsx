@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react"
-import { ITimerSettings } from "../util/types"
+import { ITimerSettings } from "../../util/types"
 
-const SquareTimer = (props: timerProps) => {
+const SquareTimer = (props: TimerProps) => {
   const { timerSettings } = props
   console.log(timerSettings)
   return (
@@ -12,8 +12,9 @@ const SquareTimer = (props: timerProps) => {
   )
 }
 
-interface timerProps {
+interface TimerProps {
   timerSettings: ITimerSettings
+  setTimerSettings: (newSettings: ITimerSettings) => void
 }
 
 export default SquareTimer

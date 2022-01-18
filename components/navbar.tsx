@@ -16,7 +16,7 @@ import {
 import { BsGearFill } from "react-icons/bs"
 import { FaUserCircle } from "react-icons/fa"
 import { AiFillDatabase } from "react-icons/ai"
-import Settings from "./settings"
+import Settings from "./settings/settings"
 import { ITimerSettings } from "../util/types"
 
 const Navbar = (props: NavProps) => {
@@ -73,7 +73,7 @@ const Navbar = (props: NavProps) => {
             bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
           />
         </Box>
-        <Modal size="md" isOpen={isOpen} onClose={onClose}>
+        <Modal size="lg" isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader fontSize="34" textAlign="center">

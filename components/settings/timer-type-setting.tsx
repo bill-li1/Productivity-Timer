@@ -14,8 +14,9 @@ const TimerTypeSetting = () => {
       <Box mr="5" ml="5" mb="2" display="flex">
         <Box
           w="50%"
+          mr="3"
           display="flex"
-          justifyContent="center"
+          justifyContent="right"
           alignContent="center"
         >
           <Button
@@ -29,8 +30,9 @@ const TimerTypeSetting = () => {
         </Box>
         <Box
           w="50%"
+          ml="3"
           display="flex"
-          justifyContent="center"
+          justifyContent="left"
           alignContent="center"
         >
           <Button

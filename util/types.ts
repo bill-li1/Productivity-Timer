@@ -1,11 +1,14 @@
 export interface ITimerSettings {
-  pomdoroTime: number
+  pomodoroTime: number
   shortBreakTime: number
-  longBreaktime: number
+  longBreakTime: number
   numBreaks: number
-  autoStartPomdoro: boolean
+  autoStartPomodoro: boolean
   autoStartShortTimer: boolean
   autoStartLongTimer: boolean
+  pomodoroColor: string
+  shortBreakColor: string
+  longBreakColor: string
   circleTimer: boolean
 }
 

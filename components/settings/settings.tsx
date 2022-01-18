@@ -6,7 +6,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react"
 import { useState } from "react"
-import { ITimerSettings } from "../util/types"
+import { ITimerSettings } from "../../util/types"
 import ThemeSetting from "./theme-setting"
 import TimerTypeSetting from "./timer-type-setting"
 import LongBreakSettings from "./long-break-settings"
@@ -47,7 +47,7 @@ const Settings = (props: SettingsProps) => {
       <ThemeSetting />
       <StyledDivider />
       <TimerTypeSetting />
-      <ModalFooter>
+      <ModalFooter mr="8">
         <Button
           mr="3"
           _hover={{}}

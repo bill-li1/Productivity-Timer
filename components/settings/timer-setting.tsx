@@ -1,4 +1,5 @@
-import { TimerSettingProps } from "../util/types"
+import { TimerSettingProps } from "../../util/types"
+import { useState, useEffect } from "react"
 import {
   Box,
   Table,
@@ -14,34 +15,60 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from "@chakra-ui/react"
+import ColorSelector from "./color-selector"
 
 const ThemeSetting = (props: TimerSettingProps) => {
   const { timerSettings, setTimerSettings } = props
+
+  const [pomodoroColor, setPomodoroTimer] = useState<string>(
+    timerSettings.pomodoroColor,
+  )
+
+  const [shortBreakColor, setShortBreakColor] = useState<string>(
+    timerSettings.shortBreakColor,
+  )
+
+  const [longBreakColor, setLongBreakColor] = useState<string>(
+    timerSettings.longBreakColor,
+  )
+
+  useEffect(() => {
+    setTimerSettings({
+      ...timerSettings,
+      pomodoroColor: pomodoroColor,
+      shortBreakColor: shortBreakColor,
+      longBreakColor: longBreakColor,
+    })
+  }, [pomodoroColor, shortBreakColor, longBreakColor])
+
   return (
-    <Box display="flex" pl="10px" mb="2">
+    <Box display="flex" pl="10px" pr="10px" mb="2">
       <Table variant="unstyled">
         <Thead>
           <Tr>
             <Th fontSize="14">Timers</Th>
-            <Th fontSize="14" pr="0" pl="10" textAlign="center">
+            <Th fontSize="14" textAlign="center">
               Duration
             </Th>
-            <Th fontSize="14" textAlign="center">
+            <Th ml="10" fontSize="14" textAlign="center" pl="6">
+              Color
+            </Th>
+            <Th fontSize="12" textAlign="center" pl="1">
               Automatically Start
             </Th>
           </Tr>
         </Thead>
         <Tbody>
           <Tr>
-            <Td>Pomdoro</Td>
-            <Td pr="0" pl="10">
+            <Td>Pomodoro</Td>
+            <Td>
               <NumberInput
-                w="100px"
-                value={timerSettings.pomdoroTime}
+                w="85px"
+                value={timerSettings.pomodoroTime}
                 onChange={(_, num) => {
                   setTimerSettings({
                     ...timerSettings,
-                    pomdoroTime: num,
+                    pomodoroTime: num,
                   })
                 }}
                 max={999}
@@ -57,21 +84,20 @@ const ThemeSetting = (props: TimerSettingProps) => {
                 </NumberInputStepper>
               </NumberInput>
             </Td>
-            <Td
-              display="flex"
-              justifyContent="center"
-              mr="15"
-              pt="6"
-              pb="0"
-              pl="10"
-            >
+            <Td pl="6">
+              <ColorSelector
+                color={pomodoroColor}
+                setColor={setPomodoroTimer}
+              />
+            </Td>
+            <Td pl="40px">
               <Switch
                 size="lg"
-                checked={timerSettings.autoStartPomdoro}
+                checked={timerSettings.autoStartPomodoro}
                 onChange={(val) => {
                   setTimerSettings({
                     ...timerSettings,
-                    autoStartPomdoro: val.currentTarget.checked,
+                    autoStartPomodoro: val.currentTarget.checked,
                   })
                 }}
               />
@@ -79,9 +105,9 @@ const ThemeSetting = (props: TimerSettingProps) => {
           </Tr>
           <Tr>
             <Td pr="0">Short Break</Td>
-            <Td pr="0" pl="10">
+            <Td>
               <NumberInput
-                w="100px"
+                w="85px"
                 value={timerSettings.shortBreakTime}
                 onChange={(_, num) => {
                   setTimerSettings({
@@ -102,14 +128,13 @@ const ThemeSetting = (props: TimerSettingProps) => {
                 </NumberInputStepper>
               </NumberInput>
             </Td>
-            <Td
-              display="flex"
-              justifyContent="center"
-              mr="15"
-              pt="6"
-              pb="0"
-              pl="10"
-            >
+            <Td pl="6">
+              <ColorSelector
+                color={shortBreakColor}
+                setColor={setShortBreakColor}
+              />
+            </Td>
+            <Td pl="40px">
               <Switch
                 size="lg"
                 checked={timerSettings.autoStartShortTimer}
@@ -124,14 +149,14 @@ const ThemeSetting = (props: TimerSettingProps) => {
           </Tr>
           <Tr>
             <Td pr="0">Long Break</Td>
-            <Td pr="0" pl="10">
+            <Td>
               <NumberInput
-                w="100px"
-                value={timerSettings.longBreaktime}
+                w="85px"
+                value={timerSettings.longBreakTime}
                 onChange={(_, num) => {
                   setTimerSettings({
                     ...timerSettings,
-                    longBreaktime: num,
+                    longBreakTime: num,
                   })
                 }}
                 max={999}
@@ -147,14 +172,13 @@ const ThemeSetting = (props: TimerSettingProps) => {
                 </NumberInputStepper>
               </NumberInput>
             </Td>
-            <Td
-              display="flex"
-              justifyContent="center"
-              mr="15"
-              pt="6"
-              pl="8"
-              pb="0"
-            >
+            <Td pl="6">
+              <ColorSelector
+                color={longBreakColor}
+                setColor={setLongBreakColor}
+              />
+            </Td>
+            <Td pl="40px">
               <Switch
                 size="lg"
                 checked={timerSettings.autoStartLongTimer}

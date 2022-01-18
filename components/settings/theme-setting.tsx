@@ -36,9 +36,10 @@ const TimerTypeSetting = () => {
       </Table>
       <Box mr="5" ml="5" mb="2" display="flex">
         <Box
+          mr="3"
           w="50%"
           display="flex"
-          justifyContent="center"
+          justifyContent="right"
           alignContent="center"
         >
           <DarkMode>
@@ -54,9 +55,10 @@ const TimerTypeSetting = () => {
           </DarkMode>
         </Box>
         <Box
+          ml="3"
           w="50%"
           display="flex"
-          justifyContent="center"
+          justifyContent="left"
           alignContent="center"
         >
           <LightMode>

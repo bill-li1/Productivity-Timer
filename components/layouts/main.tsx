@@ -8,7 +8,7 @@ const Main = ({ children, router }) => {
       <Box h="100vh">
         <Head>
           <meta name="viewport" content="initial-scale=1, width=device-width" />
-          <title> Pomdoro Timer - Homepage </title>
+          <title> Pomodoro Timer - Homepage </title>
         </Head>
         {children}
       </Box>

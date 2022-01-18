@@ -36,7 +36,7 @@ const Information = () => {
             you are working on, such as study, writing, or coding. This app is
             inspired by the{" "}
             <Link href="https://illust.odoruinu.net/" target="_blank">
-              Pomdoro Technique
+              Pomodoro Technique
             </Link>{" "}
             which is a time management method developed by Francesco Cirillo.
           </IndentedParagraph>
