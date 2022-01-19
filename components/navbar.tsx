@@ -17,6 +17,7 @@ import { BsGearFill } from "react-icons/bs"
 import { FaUserCircle } from "react-icons/fa"
 import { AiFillDatabase } from "react-icons/ai"
 import Settings from "./settings/settings"
+import ComingSoon from "./coming-soon"
 import { ITimerSettings } from "../util/types"
 
 const Navbar = (props: NavProps) => {
@@ -48,28 +49,39 @@ const Navbar = (props: NavProps) => {
 
         <Box flex={1} align="right">
           <IconButton
-            aria-label="Settings"
+            aria-label="Reports"
             ml={3}
             icon={<AiFillDatabase size={20} />}
             variant="outline"
-            borderColor="#80808070"
             bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
           />
+          <Modal size="lg" isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader fontSize="34" textAlign="center">
+                Settings
+              </ModalHeader>
+              <ModalCloseButton />
+              <Settings
+                timerSettings={timerSettings}
+                setTimerSettings={setTimerSettings}
+                onClose={onClose}
+              />
+            </ModalContent>
+          </Modal>
           <IconButton
             aria-label="Settings"
             ml={3}
             onClick={onOpen}
             icon={<BsGearFill size={20} />}
             variant="outline"
-            borderColor="#80808070"
             bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
           />
           <IconButton
-            aria-label="Settings"
+            aria-label="Profile"
             ml={3}
             icon={<FaUserCircle size={20} />}
             variant="outline"
-            borderColor="#80808070"
             bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
           />
         </Box>

@@ -14,9 +14,9 @@ const Page = () => {
     autoStartPomodoro: false,
     autoStartShortTimer: false,
     autoStartLongTimer: false,
-    pomodoroColor: "#808080",
-    shortBreakColor: "#808080",
-    longBreakColor: "#808080",
+    pomodoroColor: "red.500",
+    shortBreakColor: "blue.300",
+    longBreakColor: "blue.700",
     circleTimer: false,
   }
 
@@ -29,10 +29,7 @@ const Page = () => {
         timerSettings={timerSettings}
         setTimerSettings={setTimerSettings}
       />
-      <Container maxW="container.sm" pt={14}>
-        <Heading as="h2" variant="page-title" mb={5}>
-          Rebecca's Timer
-        </Heading>
+      <Container maxW="xl" pt={20}>
         <Timer
           timerSettings={timerSettings}
           setTimerSettings={setTimerSettings}

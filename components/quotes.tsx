@@ -27,7 +27,7 @@ const Quote = () => {
   return (
     <Box>
       <Box
-        borderRadius="lg"
+        borderRadius="15px"
         onClick={getQuotes}
         p={3}
         pl={6}
@@ -55,7 +55,7 @@ const Quote = () => {
         translateY="-25%"
         translateX="-15%"
         boxShadow="md"
-        bg={useColorModeValue("#FFDDCD", "#B69F8A")}
+        bg={useColorModeValue("#E6D7C4", "#B69F8A")}
       >
         {quote.author}
       </Box>
