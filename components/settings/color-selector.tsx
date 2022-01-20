@@ -19,16 +19,16 @@ const ColorSelector = (props: ColorSelectorProps) => {
   const { onOpen, onClose, isOpen } = useDisclosure()
 
   const colors = [
-    "gray.500",
-    "red.500",
-    "gray.700",
-    "green.500",
-    "blue.500",
-    "blue.800",
-    "yellow.500",
-    "orange.500",
-    "purple.500",
-    "pink.500",
+    "#9E9E9E",
+    "#F44336",
+    "#424242",
+    "#4CAF50",
+    "#64B5F6",
+    "#1565C0",
+    "#FFEB3B",
+    "#FF9800",
+    "#9C27B0",
+    "#E91E63",
   ]
 
   return (
@@ -36,6 +36,9 @@ const ColorSelector = (props: ColorSelectorProps) => {
       <Popover variant="picker" isOpen={isOpen} onClose={onClose}>
         <PopoverTrigger>
           <Button
+            _hover={{
+              background: `${color}80`,
+            }}
             aria-label={color}
             background={color}
             onClick={onOpen}

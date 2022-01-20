@@ -1,7 +1,18 @@
 import { Table, Thead, Th, Box, Button } from "@chakra-ui/react"
 import { BsSquareFill, BsCircleFill } from "react-icons/bs"
+import { TimerSettingProps } from "../../util/types"
+import { useState, useEffect } from "react"
 
-const TimerTypeSetting = () => {
+const TimerTypeSetting = (props: TimerSettingProps) => {
+  const { timerSettings, setTimerSettings } = props
+  const [timerType, setTimerType] = useState<string>(
+    timerSettings.circleTimer ? "circle" : "square",
+  )
+
+  useEffect(() => {
+    setTimerSettings({ ...timerSettings, circleTimer: timerType === "circle" })
+  }, [timerType])
+
   return (
     <Box mt="3" mb="5">
       <Table variant="unstyled">
@@ -21,6 +32,7 @@ const TimerTypeSetting = () => {
         >
           <Button
             size="lg"
+            onClick={() => setTimerType("circle")}
             aria-label="light toggle theme"
             colorScheme="blue"
             leftIcon={<BsCircleFill />}
@@ -37,6 +49,7 @@ const TimerTypeSetting = () => {
         >
           <Button
             size="lg"
+            onClick={() => setTimerType("square")}
             aria-label="light toggle theme"
             colorScheme="blue"
             leftIcon={<BsSquareFill />}

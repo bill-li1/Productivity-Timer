@@ -46,7 +46,10 @@ const Settings = (props: SettingsProps) => {
       <StyledDivider />
       <ThemeSetting />
       <StyledDivider />
-      <TimerTypeSetting />
+      <TimerTypeSetting
+        timerSettings={newTimerSettings}
+        setTimerSettings={setNewTimerSettings}
+      />
       <ModalFooter mr="8">
         <Button
           mr="3"

@@ -14,9 +14,9 @@ const Page = () => {
     autoStartPomodoro: false,
     autoStartShortTimer: false,
     autoStartLongTimer: false,
-    pomodoroColor: "red.500",
-    shortBreakColor: "blue.300",
-    longBreakColor: "blue.700",
+    pomodoroColor: "#F44336",
+    shortBreakColor: "#64B5F6",
+    longBreakColor: "#1565C0",
     circleTimer: false,
   }
 

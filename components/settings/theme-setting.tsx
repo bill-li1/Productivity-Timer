@@ -14,7 +14,7 @@ import { SunIcon, MoonIcon } from "@chakra-ui/icons"
 
 const TimerTypeSetting = () => {
   const { toggleColorMode } = useColorMode()
-  const [theme, setTheme] = useState<String>(useColorModeValue("light", "dark"))
+  const [theme, setTheme] = useState<string>(useColorModeValue("light", "dark"))
   const notInitialRender = useRef(false)
 
   useEffect(() => {

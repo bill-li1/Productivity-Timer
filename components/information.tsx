@@ -21,7 +21,7 @@ const IndentedParagraph = styled.p`
 
 const Information = () => {
   return (
-    <Box bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")} h="100vh">
+    <Box bg={useColorModeValue("whiteAlpha.600", "#5D5D64")} h="100vh">
       <Container pt={16} pb={3} maxW="container.sm">
         <Box>
           <Heading pb={6}>
