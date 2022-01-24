@@ -1,6 +1,6 @@
 import { Box, useColorModeValue } from "@chakra-ui/react"
 import { ITimerSettings } from "../../util/types"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import useTimer from "easytimer-react-hook"
 import CircleTimer from "./circle-timer"
 import SquareTimer from "./square-timer"
@@ -9,8 +9,10 @@ import TimerButtons from "./timer-buttons"
 
 const Timer = (props: TimerProps) => {
   const { timerSettings } = props
+  const skipFirstRender = useRef<boolean>(false)
   const [notStarted, setNotStarted] = useState<boolean>(true)
   const [timer, isTargetAchieved] = useTimer({ updateWhenTargetAchieved: true })
+  console.log(isTargetAchieved)
 
   const returnTime = (timerType: string) => {
     switch (timerType) {
@@ -45,7 +47,19 @@ const Timer = (props: TimerProps) => {
     })
     timer.pause()
     setNotStarted(true)
-  }, [timerType])
+  }, [timerType, timerSettings])
+
+  //TODO 
+  // eventually we will move everything to context? idk maybe
+  // IF AUTO START THEN AUTO START
+  // IF NOT AUTO START DO NOT AUTO START THINGS (RESET TIMER)
+  useEffect(() => {
+    if (skipFirstRender.current) {
+      console.log("pog")
+    } else {
+      skipFirstRender.current = true
+    }
+  }, [isTargetAchieved])
 
   return (
     <Box
