@@ -1,23 +1,18 @@
 import { Box, useColorModeValue } from "@chakra-ui/react"
 import { useState, useEffect } from "react"
 import allQuotes from "../util/quotes.json"
+import axios from "axios"
 
 const Quote = () => {
-  const [quote, setQuotes] = useState<IQuote>({
+  const [quote, setQuote] = useState<IQuote>({
     text: "",
     author: "",
   })
 
   const getQuotes = () => {
-    const quoteIndex = Math.floor(Math.random() * allQuotes.length)
-    if (
-      allQuotes[quoteIndex].text !== null &&
-      allQuotes[quoteIndex].author !== null
-    ) {
-      setQuotes(allQuotes[quoteIndex])
-    } else {
-      getQuotes
-    }
+    axios.get("https://stoic-quotes.com/api/quote").then((response) => {
+      setQuote(response.data)
+    })
   }
 
   useEffect(() => {

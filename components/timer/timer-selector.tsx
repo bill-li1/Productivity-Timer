@@ -1,10 +1,25 @@
-import { Box, HStack, useColorModeValue, Button } from "@chakra-ui/react"
+import {
+  Box,
+  HStack,
+  Button,
+  Modal,
+  ModalFooter,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  ModalOverlay,
+  ModalContent,
+  useDisclosure,
+  useColorModeValue,
+} from "@chakra-ui/react"
+import { useRef } from "react"
 import { ITimerSettings } from "../../util/types"
-import { useState } from "react"
+import Timer from "easytimer.js"
 
 const TimerSelector = (props: TimerSelectorProps) => {
-  const { timerSettings } = props
-  const [timer, setTimer] = useState<string>("Pomodoro")
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { timerSettings, timerType, setTimerType, timer } = props
+  const tempTimer = useRef<string>()
   const returnColor = (timerType: string) => {
     switch (timerType) {
       case "Pomodoro":
@@ -15,6 +30,17 @@ const TimerSelector = (props: TimerSelectorProps) => {
         return timerSettings.longBreakColor
     }
   }
+
+  const modalSubmit = () => {
+    setTimerType(tempTimer.current)
+    onClose()
+  }
+
+  const modalClose = () => {
+    tempTimer.current = timerType
+    onClose()
+  }
+
   return (
     <HStack
       display="flex"
@@ -39,12 +65,23 @@ const TimerSelector = (props: TimerSelectorProps) => {
           pt="2px"
           w="100%"
           h="100%"
-          onClick={() => setTimer("Pomodoro")}
+          onClick={() => {
+            if (tempTimer.current !== "Pomodoro") {
+              tempTimer.current = "Pomodoro"
+              if (timer.isRunning()) {
+                onOpen()
+              } else {
+                setTimerType("Pomodoro")
+              }
+            }
+          }}
           color={
-            timer === "Pomodoro" ? "white" : useColorModeValue("black", "white")
+            timerType === "Pomodoro"
+              ? "white"
+              : useColorModeValue("black", "white")
           }
           borderRadius="10px"
-          bg={timer === "Pomodoro" ? returnColor("Pomodoro") : ""}
+          bg={timerType === "Pomodoro" ? returnColor("Pomodoro") : ""}
         >
           Pomodoro
         </Button>
@@ -63,14 +100,23 @@ const TimerSelector = (props: TimerSelectorProps) => {
           pt="2px"
           w="100%"
           h="100%"
-          onClick={() => setTimer("Short Break")}
+          onClick={() => {
+            if (tempTimer.current !== "Short Break") {
+              tempTimer.current = "Short Break"
+              if (timer.isRunning()) {
+                onOpen()
+              } else {
+                setTimerType("Short Break")
+              }
+            }
+          }}
           color={
-            timer === "Short Break"
+            timerType === "Short Break"
               ? "white"
               : useColorModeValue("black", "white")
           }
           borderRadius="10px"
-          bg={timer === "Short Break" ? returnColor("Short Break") : ""}
+          bg={timerType === "Short Break" ? returnColor("Short Break") : ""}
         >
           Short Break
         </Button>
@@ -90,24 +136,52 @@ const TimerSelector = (props: TimerSelectorProps) => {
           pt="2px"
           w="100%"
           h="100%"
-          onClick={() => setTimer("Long Break")}
+          onClick={() => {
+            if (tempTimer.current !== "Long Break") {
+              tempTimer.current = "Long Break"
+              if (timer.isRunning()) {
+                onOpen()
+              } else {
+                setTimerType("Long Break")
+              }
+            }
+          }}
           color={
-            timer === "Long Break"
+            timerType === "Long Break"
               ? "white"
               : useColorModeValue("black", "white")
           }
           borderRadius="10px"
-          bg={timer === "Long Break" ? returnColor("Long Break") : ""}
+          bg={timerType === "Long Break" ? returnColor("Long Break") : ""}
         >
           Long Break
         </Button>
       </Box>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>random text aha blah blah blah.</ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={modalClose}>
+              Close
+            </Button>
+            <Button variant="solid" onClick={modalSubmit}>
+              Reset
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </HStack>
   )
 }
 
 interface TimerSelectorProps {
   timerSettings: ITimerSettings
+  timer: Timer
+  timerType: string
+  setTimerType: React.Dispatch<React.SetStateAction<string>>
 }
 
 export default TimerSelector

@@ -16,3 +16,8 @@ export interface TimerSettingProps {
   timerSettings: ITimerSettings
   setTimerSettings: (newSettings: ITimerSettings) => void
 }
+
+export interface ITime {
+  minutes: number
+  seconds: number
+}

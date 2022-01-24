@@ -8,7 +8,6 @@ import {
   Container,
   Box,
   Heading,
-  Flex,
   IconButton,
   useColorModeValue,
   useDisclosure,
@@ -26,27 +25,30 @@ const Navbar = (props: NavProps) => {
 
   return (
     <Box
-      position="fixed"
       as="nav"
-      w="100%"
-      bg={useColorModeValue("#f0e7db60", "#20202360")}
+      left="0"
+      right="0"
+      bg={useColorModeValue("#f0e7db", "#20202360")}
       zIndex={1}
       {...props}
     >
       <Container
         display="flex"
-        p={2}
-        maxW="container.md"
-        wrap="wrap"
-        align="center"
-        justify="space-between"
+        borderBottom="1px solid gray"
+        pt={2}
+        pb={2}
+        pl={0}
+        maxW="container.sm"
       >
-        <Flex align="center" mr={5}>
-          <Heading as="h1" size="lg" letterSpacing={"tighter"}>
-            <Logo />
-          </Heading>
-        </Flex>
-
+        <Heading
+          position="absolute"
+          pt="6px"
+          as="h1"
+          size="lg"
+          letterSpacing={"tighter"}
+        >
+          <Logo />
+        </Heading>
         <Box flex={1} align="right">
           <IconButton
             aria-label="Reports"

@@ -1,4 +1,4 @@
-import { Container, Box, Heading } from "@chakra-ui/react"
+import { Container, Box, Heading, Divider, Center } from "@chakra-ui/react"
 import { useState } from "react"
 import Navbar from "../components/navbar"
 import Quote from "../components/quotes"
@@ -29,7 +29,7 @@ const Page = () => {
         timerSettings={timerSettings}
         setTimerSettings={setTimerSettings}
       />
-      <Container maxW="xl" pt={20}>
+      <Container maxW="xl" mt={10}>
         <Timer
           timerSettings={timerSettings}
           setTimerSettings={setTimerSettings}
