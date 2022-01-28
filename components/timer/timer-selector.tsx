@@ -19,7 +19,7 @@ import Timer from "easytimer.js"
 const TimerSelector = (props: TimerSelectorProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { timerSettings, timerType, setTimerType, timer } = props
-  const tempTimer = useRef<string>()
+  const tempTimer = useRef<string>(timerType)
   const returnColor = (timerType: string) => {
     switch (timerType) {
       case "Pomodoro":

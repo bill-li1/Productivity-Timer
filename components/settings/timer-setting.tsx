@@ -41,6 +41,8 @@ const ThemeSetting = (props: TimerSettingProps) => {
     })
   }, [pomodoroColor, shortBreakColor, longBreakColor])
 
+  console.log("pain", timerSettings)
+
   return (
     <Box display="flex" pl="10px" pr="10px" mb="2">
       <Table variant="unstyled">
@@ -93,7 +95,7 @@ const ThemeSetting = (props: TimerSettingProps) => {
             <Td pl="40px">
               <Switch
                 size="lg"
-                checked={timerSettings.autoStartPomodoro}
+                isChecked={timerSettings.autoStartPomodoro}
                 onChange={(val) => {
                   setTimerSettings({
                     ...timerSettings,
@@ -137,7 +139,7 @@ const ThemeSetting = (props: TimerSettingProps) => {
             <Td pl="40px">
               <Switch
                 size="lg"
-                checked={timerSettings.autoStartShortTimer}
+                isChecked={timerSettings.autoStartShortTimer}
                 onChange={(val) => {
                   setTimerSettings({
                     ...timerSettings,
@@ -181,7 +183,7 @@ const ThemeSetting = (props: TimerSettingProps) => {
             <Td pl="40px">
               <Switch
                 size="lg"
-                checked={timerSettings.autoStartLongTimer}
+                isChecked={timerSettings.autoStartLongTimer}
                 onChange={(val) => {
                   setTimerSettings({
                     ...timerSettings,
