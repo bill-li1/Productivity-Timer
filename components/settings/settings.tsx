@@ -5,12 +5,13 @@ import {
   ModalFooter,
   useColorModeValue,
 } from "@chakra-ui/react"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { ITimerSettings } from "../../util/types"
 import ThemeSetting from "./theme-setting"
 import TimerTypeSetting from "./timer-type-setting"
 import LongBreakSettings from "./long-break-settings"
 import TimerSettings from "./timer-setting"
+import { SettingContext } from "../../pages"
 
 const StyledDivider = () => {
   return (
@@ -21,7 +22,8 @@ const StyledDivider = () => {
 }
 
 const Settings = (props: SettingsProps) => {
-  const { timerSettings, setTimerSettings, onClose } = props
+  const { timerSettings, setTimerSettings } = useContext(SettingContext)
+  const { onClose } = props
   const [newTimerSettings, setNewTimerSettings] = useState<ITimerSettings>(
     JSON.parse(JSON.stringify(timerSettings)),
   )
@@ -69,8 +71,6 @@ const Settings = (props: SettingsProps) => {
 }
 
 interface SettingsProps {
-  timerSettings: ITimerSettings
-  setTimerSettings: (newSettings: ITimerSettings) => void
   onClose: () => void
 }
 

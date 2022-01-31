@@ -12,13 +12,14 @@ import {
   useDisclosure,
   useColorModeValue,
 } from "@chakra-ui/react"
-import { useRef } from "react"
-import { ITimerSettings } from "../../util/types"
+import { useRef, useContext, useEffect } from "react"
 import Timer from "easytimer.js"
+import { SettingContext } from "../../pages"
 
 const TimerSelector = (props: TimerSelectorProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { timerSettings, timerType, setTimerType, timer } = props
+  const { timerSettings } = useContext(SettingContext)
+  const { timerType, setTimerType, timer } = props
   const tempTimer = useRef<string>(timerType)
   const returnColor = (timerType: string) => {
     switch (timerType) {
@@ -30,6 +31,10 @@ const TimerSelector = (props: TimerSelectorProps) => {
         return timerSettings.longBreakColor
     }
   }
+
+  useEffect(() => {
+    tempTimer.current = timerType
+  }, [timerType])
 
   const modalSubmit = () => {
     setTimerType(tempTimer.current)
@@ -178,7 +183,6 @@ const TimerSelector = (props: TimerSelectorProps) => {
 }
 
 interface TimerSelectorProps {
-  timerSettings: ITimerSettings
   timer: Timer
   timerType: string
   setTimerType: React.Dispatch<React.SetStateAction<string>>

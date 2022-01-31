@@ -1,4 +1,4 @@
-import { Table, Thead, Th, Box, Button } from "@chakra-ui/react"
+import { Table, Thead, Th, Tr, Box, Button } from "@chakra-ui/react"
 import { BsSquareFill, BsCircleFill } from "react-icons/bs"
 import { TimerSettingProps } from "../../util/types"
 import { useState, useEffect } from "react"
@@ -17,9 +17,11 @@ const TimerTypeSetting = (props: TimerSettingProps) => {
     <Box mt="3" mb="5">
       <Table variant="unstyled">
         <Thead>
-          <Th fontSize="16" textAlign="center" w="xl" pb="20px">
-            Timer Style
-          </Th>
+          <Tr>
+            <Th fontSize="16" textAlign="center" w="xl" pb="20px">
+              Timer Style
+            </Th>
+          </Tr>
         </Thead>
       </Table>
       <Box mr="5" ml="5" mb="2" display="flex">

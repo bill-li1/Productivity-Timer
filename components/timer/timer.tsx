@@ -1,14 +1,14 @@
 import { Box, useColorModeValue } from "@chakra-ui/react"
-import { ITimerSettings } from "../../util/types"
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useContext } from "react"
 import useTimer from "easytimer-react-hook"
 import CircleTimer from "./circle-timer"
 import SquareTimer from "./square-timer"
 import TimerSelector from "./timer-selector"
 import TimerButtons from "./timer-buttons"
+import { SettingContext } from "../../pages"
 
-const Timer = (props: TimerProps) => {
-  const { timerSettings } = props
+const Timer = () => {
+  const { timerSettings } = useContext(SettingContext)
   const skipFirstRender = useRef<boolean>(false)
   const [notStarted, setNotStarted] = useState<boolean>(true)
   const [timer, isTargetAchieved] = useTimer({ updateWhenTargetAchieved: true })
@@ -40,7 +40,7 @@ const Timer = (props: TimerProps) => {
   useEffect(() => {
     timer.stop()
     timer.start({
-      startValues: { minutes: 0/* returnTime(timerType) */, seconds: 5 },
+      startValues: { minutes: 0 /* returnTime(timerType)*/, seconds: 1 },
       target: { minutes: 0, seconds: 0 },
       countdown: true,
     })
@@ -48,18 +48,15 @@ const Timer = (props: TimerProps) => {
     setNotStarted(true)
   }, [timerType, timerSettings])
 
-  //TODO
-  // eventually we will move everything to context? idk maybe
-  // IF AUTO START THEN AUTO START
-  // IF NOT AUTO START DO NOT AUTO START THINGS (RESET TIMER)
   useEffect(() => {
     if (skipFirstRender.current) {
       if (timerType === "Pomodoro") {
         if (timerSettings.autoStartShortTimer) {
           setTimerType("Short Break")
-          console.log("hi")
+          console.log("is on")
         } else {
           setTimerType("Short Break")
+          console.log("not on")
         }
       } else if (timerType === "Short Break") {
         if (timerSettings.autoStartShortTimer) {
@@ -88,27 +85,23 @@ const Timer = (props: TimerProps) => {
       p="10px"
     >
       <TimerSelector
-        timerSettings={timerSettings}
         timer={timer}
         timerType={timerType}
         setTimerType={setTimerType}
       />
       <Box height="calc(100% - 44px)">
-        {/*console.log(timerSettings)*/}
-        {
-          timerSettings.circleTimer ? (
-            <CircleTimer
-              timeValues={timer.getTimeValues()}
-              color={returnColor(timerType)}
-            />
-          ) : (
-            <SquareTimer
-              timeValues={timer.getTimeValues()}
-              color={returnColor(timerType)}
-            />
-          )
-        }
-        < TimerButtons
+        {timerSettings.circleTimer ? (
+          <CircleTimer
+            timeValues={timer.getTimeValues()}
+            color={returnColor(timerType)}
+          />
+        ) : (
+          <SquareTimer
+            timeValues={timer.getTimeValues()}
+            color={returnColor(timerType)}
+          />
+        )}
+        <TimerButtons
           timer={timer}
           notStarted={notStarted}
           setNotStarted={setNotStarted}
@@ -116,10 +109,6 @@ const Timer = (props: TimerProps) => {
       </Box>
     </Box>
   )
-}
-
-interface TimerProps {
-  timerSettings: ITimerSettings
 }
 
 export default Timer

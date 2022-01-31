@@ -1,9 +1,11 @@
-import { Container, Box, Heading, Divider, Center } from "@chakra-ui/react"
-import { useState } from "react"
+import { Container, Box } from "@chakra-ui/react"
+import { useState, createContext } from "react"
 import Navbar from "../components/navbar"
 import Quote from "../components/quotes"
-import { ITimerSettings } from "../util/types"
+import { ITimerSettings, ITimerContext } from "../util/types"
 import Timer from "../components/timer/timer"
+
+export const SettingContext = createContext<ITimerContext | null>(null)
 
 const Page = () => {
   const initialTimerSettings: ITimerSettings = {
@@ -24,19 +26,15 @@ const Page = () => {
     useState<ITimerSettings>(initialTimerSettings)
 
   return (
-    <Box>
-      <Navbar
-        timerSettings={timerSettings}
-        setTimerSettings={setTimerSettings}
-      />
-      <Container maxW="xl" mt={10}>
-        <Timer
-          timerSettings={timerSettings}
-          setTimerSettings={setTimerSettings}
-        />
-        <Quote />
-      </Container>
-    </Box>
+    <SettingContext.Provider value={{ timerSettings, setTimerSettings }}>
+      <Box>
+        <Navbar />
+        <Container maxW="xl" mt={10}>
+          <Timer />
+          <Quote />
+        </Container>
+      </Box>
+    </SettingContext.Provider>
   )
 }
 

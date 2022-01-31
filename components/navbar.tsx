@@ -17,10 +17,8 @@ import { FaUserCircle } from "react-icons/fa"
 import { AiFillDatabase } from "react-icons/ai"
 import Settings from "./settings/settings"
 import ComingSoon from "./coming-soon"
-import { ITimerSettings } from "../util/types"
 
-const Navbar = (props: NavProps) => {
-  const { timerSettings, setTimerSettings } = props
+const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -30,7 +28,6 @@ const Navbar = (props: NavProps) => {
       right="0"
       bg={useColorModeValue("#f0e7db", "#20202360")}
       zIndex={1}
-      {...props}
     >
       <Container
         display="flex"
@@ -57,20 +54,6 @@ const Navbar = (props: NavProps) => {
             variant="outline"
             bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
           />
-          <Modal size="lg" isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent>
-              <ModalHeader fontSize="34" textAlign="center">
-                Settings
-              </ModalHeader>
-              <ModalCloseButton />
-              <Settings
-                timerSettings={timerSettings}
-                setTimerSettings={setTimerSettings}
-                onClose={onClose}
-              />
-            </ModalContent>
-          </Modal>
           <IconButton
             aria-label="Settings"
             ml={3}
@@ -95,8 +78,6 @@ const Navbar = (props: NavProps) => {
             </ModalHeader>
             <ModalCloseButton />
             <Settings
-              timerSettings={timerSettings}
-              setTimerSettings={setTimerSettings}
               onClose={onClose}
             />
           </ModalContent>
@@ -104,11 +85,6 @@ const Navbar = (props: NavProps) => {
       </Container>
     </Box>
   )
-}
-
-interface NavProps {
-  timerSettings: ITimerSettings
-  setTimerSettings: (newSettings: ITimerSettings) => void
 }
 
 export default Navbar

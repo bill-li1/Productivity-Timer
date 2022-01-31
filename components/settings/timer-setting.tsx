@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react"
 import ColorSelector from "./color-selector"
 
-const ThemeSetting = (props: TimerSettingProps) => {
+const TimerSetting = (props: TimerSettingProps) => {
   const { timerSettings, setTimerSettings } = props
 
   const [pomodoroColor, setPomodoroTimer] = useState<string>(
@@ -40,8 +40,6 @@ const ThemeSetting = (props: TimerSettingProps) => {
       longBreakColor: longBreakColor,
     })
   }, [pomodoroColor, shortBreakColor, longBreakColor])
-
-  console.log("pain", timerSettings)
 
   return (
     <Box display="flex" pl="10px" pr="10px" mb="2">
@@ -199,4 +197,4 @@ const ThemeSetting = (props: TimerSettingProps) => {
   )
 }
 
-export default ThemeSetting
+export default TimerSetting

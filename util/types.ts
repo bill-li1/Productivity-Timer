@@ -21,3 +21,8 @@ export interface ITime {
   minutes: number
   seconds: number
 }
+
+export interface ITimerContext {
+  timerSettings: ITimerSettings
+  setTimerSettings: (value: ITimerSettings) => void
+}

@@ -2,6 +2,7 @@ import {
   Table,
   Thead,
   Th,
+  Tr,
   Box,
   Button,
   LightMode,
@@ -12,7 +13,7 @@ import {
 import { useState, useEffect, useRef } from "react"
 import { SunIcon, MoonIcon } from "@chakra-ui/icons"
 
-const TimerTypeSetting = () => {
+const ThemeSetting = () => {
   const { toggleColorMode } = useColorMode()
   const [theme, setTheme] = useState<string>(useColorModeValue("light", "dark"))
   const notInitialRender = useRef(false)
@@ -29,9 +30,11 @@ const TimerTypeSetting = () => {
     <Box mt="3" mb="6">
       <Table variant="unstyled">
         <Thead>
-          <Th fontSize="16" textAlign="center" w="xl" pb="20px">
-            Theme
-          </Th>
+          <Tr>
+            <Th fontSize="16" textAlign="center" w="xl" pb="20px">
+              Theme
+            </Th>
+          </Tr>
         </Thead>
       </Table>
       <Box mr="5" ml="5" mb="2" display="flex">
@@ -78,4 +81,4 @@ const TimerTypeSetting = () => {
   )
 }
 
-export default TimerTypeSetting
+export default ThemeSetting

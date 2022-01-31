@@ -1,6 +1,6 @@
 import Head from "next/head"
 import Information from "../information"
-import { Box, Container } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react"
 
 const Main = ({ children, router }) => {
   return (
