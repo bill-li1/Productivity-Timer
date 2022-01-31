@@ -10,17 +10,50 @@ import {
   ModalContent,
   useDisclosure,
 } from "@chakra-ui/react"
+import { useContext, useState, useEffect } from "react"
 import Timer from "easytimer.js"
+import { SettingContext } from "../../pages"
 
 const TimerButtons = (props: TimerButtonProps) => {
-  const { timer, notStarted, setNotStarted } = props
+  const { timerSettings } = useContext(SettingContext)
+  const { timer, notStarted, setNotStarted, timerType } = props
+  const [timerButton, setTimerButton] = useState<string>(
+    timer.isRunning() ? "Pause" : "Start",
+  )
   const { isOpen, onOpen, onClose } = useDisclosure()
+
   const modalSubmit = () => {
     timer.reset()
-    timer.pause()
-    setNotStarted(true)
+    if (
+      !(
+        (timerType === "Pomodoro" && timerSettings.autoStartPomodoro) ||
+        (timerType === "Short Break" && timerSettings.autoStartShortTimer) ||
+        (timerType === "Long Break" && timerSettings.autoStartLongTimer)
+      )
+    ) {
+      timer.pause()
+      setNotStarted(true)
+      setTimerButton("Start")
+    } else {
+      setTimerButton("Pause")
+    }
     onClose()
   }
+
+  useEffect(() => {
+    if (
+      !(
+        (timerType === "Pomodoro" && timerSettings.autoStartPomodoro) ||
+        (timerType === "Short Break" && timerSettings.autoStartShortTimer) ||
+        (timerType === "Long Break" && timerSettings.autoStartLongTimer)
+      )
+    ) {
+      setTimerButton("Start")
+    } else {
+      setTimerButton("Pause")
+    }
+  }, [timerType])
+
   return (
     <Box>
       <Box display="flex" justifyContent="center">
@@ -29,25 +62,22 @@ const TimerButtons = (props: TimerButtonProps) => {
             setNotStarted(false)
             if (timer.isRunning()) {
               timer.pause()
+              setTimerButton("Start")
             } else {
               timer.start()
+              setTimerButton("Pause")
             }
           }}
           w="50%"
           borderRadius="xl"
           mr="1"
         >
-          {timer.isPaused() ? "Start" : "Pause"}
+          {timerButton}
         </Button>
         <Button
           disabled={notStarted}
           onClick={() => {
-            if (timer.isRunning()) {
-              onOpen()
-            } else {
-              timer.reset()
-              timer.pause()
-            }
+            onOpen()
           }}
           w="50%"
           borderRadius="xl"
@@ -80,6 +110,7 @@ interface TimerButtonProps {
   timer: Timer
   notStarted: boolean
   setNotStarted: React.Dispatch<React.SetStateAction<boolean>>
+  timerType: string
 }
 
 export default TimerButtons

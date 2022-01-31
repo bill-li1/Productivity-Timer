@@ -40,37 +40,40 @@ const Timer = () => {
   useEffect(() => {
     timer.stop()
     timer.start({
-      startValues: { minutes: 0 /* returnTime(timerType)*/, seconds: 1 },
+      startValues: { minutes: /* returnTime(timerType) */ 0, seconds: 3 },
+      // startValues: { minutes: returnTime(timerType), seconds: 0 },
       target: { minutes: 0, seconds: 0 },
       countdown: true,
     })
-    timer.pause()
-    setNotStarted(true)
-  }, [timerType, timerSettings])
+    if (
+      !(
+        (timerType === "Pomodoro" && timerSettings.autoStartPomodoro) ||
+        (timerType === "Short Break" && timerSettings.autoStartShortTimer) ||
+        (timerType === "Long Break" && timerSettings.autoStartLongTimer)
+      )
+    ) {
+      timer.pause()
+      setNotStarted(true)
+    }
+  }, [
+    timerType,
+    timerSettings.pomodoroTime,
+    timerSettings.shortBreakTime,
+    timerSettings.longBreakTime,
+    timerSettings.numBreaks,
+    timerSettings.circleTimer,
+  ])
 
   useEffect(() => {
     if (skipFirstRender.current) {
       if (timerType === "Pomodoro") {
-        if (timerSettings.autoStartShortTimer) {
-          setTimerType("Short Break")
-          console.log("is on")
-        } else {
-          setTimerType("Short Break")
-          console.log("not on")
-        }
+        setTimerType("Short Break")
       } else if (timerType === "Short Break") {
-        if (timerSettings.autoStartShortTimer) {
-          setTimerType("Short Break")
-        } else {
-          setTimerType("Short Break")
-        }
+        setTimerType("Long Break")
       } else if (timerType === "Long Break") {
-        if (timerSettings.autoStartShortTimer) {
-          setTimerType("Short Break")
-        } else {
-          setTimerType("Short Break")
-        }
+        setTimerType("Pomodoro")
       }
+      skipFirstRender.current = false
     } else {
       skipFirstRender.current = true
     }
@@ -105,6 +108,7 @@ const Timer = () => {
           timer={timer}
           notStarted={notStarted}
           setNotStarted={setNotStarted}
+          timerType={timerType}
         />
       </Box>
     </Box>
