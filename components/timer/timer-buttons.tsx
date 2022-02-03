@@ -53,27 +53,54 @@ const TimerButtons = (props: TimerButtonProps) => {
       setTimerButton("Pause")
     }
   }, [timerType])
-
+  // TODO
+  // add two more buttons without text, just icons
+  // ---------------------------
+  // | Start | Reset | B1 | B2 |
+  // ---------------------------
+  // B1: Add time
+  // B2: Go next
   return (
     <Box>
-      <Box display="flex" justifyContent="center">
-        <Button
-          onClick={() => {
-            setNotStarted(false)
-            if (timer.isRunning()) {
-              timer.pause()
-              setTimerButton("Start")
-            } else {
-              timer.start()
-              setTimerButton("Pause")
-            }
-          }}
-          w="50%"
-          borderRadius="xl"
-          mr="1"
+      <Box display="flex" border="3px solid blue">
+        <Box
+          border="3px solid blue"
+          w="35%"
+          display="flex"
+          justifyContent="center"
+        ></Box>
+        <Box
+          border="3px solid blue"
+          display="flex"
+          justifyContent="center"
+          w="30%"
         >
-          {timerButton}
-        </Button>
+          <Button
+            onClick={() => {
+              setNotStarted(false)
+              if (timer.isRunning()) {
+                timer.pause()
+                setTimerButton("Start")
+              } else {
+                timer.start()
+                setTimerButton("Pause")
+              }
+            }}
+            w="100%"
+            borderRadius="xl"
+            mr="1"
+            ml="1"
+          >
+            {timerButton}
+          </Button>
+        </Box>
+        <Box
+          border="3px solid blue"
+          display="flex"
+          justifyContent="center"
+          w="35%"
+        ></Box>
+        {/*
         <Button
           disabled={notStarted}
           onClick={() => {
@@ -85,6 +112,7 @@ const TimerButtons = (props: TimerButtonProps) => {
         >
           Reset
         </Button>
+        */}
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
