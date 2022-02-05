@@ -62,15 +62,13 @@ const TimerButtons = (props: TimerButtonProps) => {
   // B2: Go next
   return (
     <Box>
-      <Box display="flex" border="3px solid blue">
+      <Box display="flex">
         <Box
-          border="3px solid blue"
           w="35%"
           display="flex"
           justifyContent="center"
         ></Box>
         <Box
-          border="3px solid blue"
           display="flex"
           justifyContent="center"
           w="30%"
@@ -95,7 +93,6 @@ const TimerButtons = (props: TimerButtonProps) => {
           </Button>
         </Box>
         <Box
-          border="3px solid blue"
           display="flex"
           justifyContent="center"
           w="35%"
