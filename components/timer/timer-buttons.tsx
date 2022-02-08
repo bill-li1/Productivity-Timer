@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react"
 import { useContext, useState, useEffect } from "react"
 import Timer from "easytimer.js"
+import { BsFillPlayCircleFill, BsFillPauseCircleFill } from "react-icons/bs"
 import { SettingContext } from "../../pages"
 
 const TimerButtons = (props: TimerButtonProps) => {
@@ -53,27 +54,27 @@ const TimerButtons = (props: TimerButtonProps) => {
       setTimerButton("Pause")
     }
   }, [timerType])
-  // TODO
-  // add two more buttons without text, just icons
-  // ---------------------------
-  // | Start | Reset | B1 | B2 |
-  // ---------------------------
-  // B1: Add time
-  // B2: Go next
+
   return (
     <Box>
       <Box display="flex">
         <Box
-          w="35%"
           display="flex"
           justifyContent="center"
-        ></Box>
-        <Box
-          display="flex"
-          justifyContent="center"
-          w="30%"
+          w="60%"
+          border="3px sold red"
         >
           <Button
+            leftIcon={
+              timerButton == "Start" ? (
+                <BsFillPlayCircleFill />
+              ) : (
+                <BsFillPauseCircleFill />
+              )
+            }
+            _focus={{
+              outline: "none",
+            }}
             onClick={() => {
               setNotStarted(false)
               if (timer.isRunning()) {
@@ -92,11 +93,6 @@ const TimerButtons = (props: TimerButtonProps) => {
             {timerButton}
           </Button>
         </Box>
-        <Box
-          display="flex"
-          justifyContent="center"
-          w="35%"
-        ></Box>
         {/*
         <Button
           disabled={notStarted}
