@@ -48,6 +48,7 @@ const Navbar = () => {
         </Heading>
         <Box flex={1} align="right">
           <IconButton
+            borderRadius="xl"
             aria-label="Reports"
             ml={3}
             icon={<AiFillDatabase size={20} />}
@@ -55,6 +56,7 @@ const Navbar = () => {
             bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
           />
           <IconButton
+            borderRadius="xl"
             aria-label="Settings"
             ml={3}
             onClick={onOpen}
@@ -63,6 +65,7 @@ const Navbar = () => {
             bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
           />
           <IconButton
+            borderRadius="xl"
             aria-label="Profile"
             ml={3}
             icon={<FaUserCircle size={20} />}
@@ -77,9 +80,7 @@ const Navbar = () => {
               Settings
             </ModalHeader>
             <ModalCloseButton />
-            <Settings
-              onClose={onClose}
-            />
+            <Settings onClose={onClose} />
           </ModalContent>
         </Modal>
       </Container>

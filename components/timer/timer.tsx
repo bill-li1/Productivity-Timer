@@ -11,6 +11,7 @@ const Timer = () => {
   const { timerSettings } = useContext(SettingContext)
   const skipFirstRender = useRef<boolean>(false)
   const [notStarted, setNotStarted] = useState<boolean>(true)
+  const longBreakCounter = useRef<number>(0)
   const [timer, isTargetAchieved] = useTimer({ updateWhenTargetAchieved: true })
 
   const returnTime = (timerType: string) => {
@@ -40,8 +41,8 @@ const Timer = () => {
   useEffect(() => {
     timer.stop()
     timer.start({
-      startValues: { minutes: /* returnTime(timerType) */ 0, seconds: 3 },
-      // startValues: { minutes: returnTime(timerType), seconds: 0 },
+      // startValues: { minutes: /* returnTime(timerType) */ 0, seconds: 3 },
+      startValues: { minutes: returnTime(timerType), seconds: 0 },
       target: { minutes: 0, seconds: 0 },
       countdown: true,
     })
@@ -67,10 +68,14 @@ const Timer = () => {
   useEffect(() => {
     if (skipFirstRender.current) {
       if (timerType === "Pomodoro") {
-        setTimerType("Short Break")
-      } else if (timerType === "Short Break") {
-        setTimerType("Long Break")
-      } else if (timerType === "Long Break") {
+        longBreakCounter.current++
+        if (longBreakCounter.current === timerSettings.numBreaks) {
+          longBreakCounter.current = 0
+          setTimerType("Long Break")
+        } else {
+          setTimerType("Short Break")
+        }
+      } else {
         setTimerType("Pomodoro")
       }
       skipFirstRender.current = false
@@ -92,7 +97,7 @@ const Timer = () => {
         timerType={timerType}
         setTimerType={setTimerType}
       />
-      <Box height="calc(100% - 44px)">
+      <Box height="calc(100% - 35px)">
         {timerSettings.circleTimer ? (
           <CircleTimer
             timeValues={timer.getTimeValues()}
@@ -109,6 +114,7 @@ const Timer = () => {
           notStarted={notStarted}
           setNotStarted={setNotStarted}
           timerType={timerType}
+          setTimerType={setTimerType}
         />
       </Box>
     </Box>

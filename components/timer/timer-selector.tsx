@@ -67,7 +67,6 @@ const TimerSelector = (props: TimerSelectorProps) => {
           fontSize="16px"
           display="flex"
           justifyContent="center"
-          pt="2px"
           w="100%"
           h="100%"
           onClick={() => {
@@ -102,7 +101,6 @@ const TimerSelector = (props: TimerSelectorProps) => {
           fontSize="16px"
           display="flex"
           justifyContent="center"
-          pt="2px"
           w="100%"
           h="100%"
           onClick={() => {
@@ -138,7 +136,6 @@ const TimerSelector = (props: TimerSelectorProps) => {
           fontSize="16px"
           display="flex"
           justifyContent="center"
-          pt="2px"
           w="100%"
           h="100%"
           onClick={() => {

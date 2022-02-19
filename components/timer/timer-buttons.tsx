@@ -1,5 +1,7 @@
 import {
   Box,
+  Fade,
+  IconButton,
   Modal,
   Button,
   ModalFooter,
@@ -10,33 +12,49 @@ import {
   ModalContent,
   useDisclosure,
 } from "@chakra-ui/react"
-import { useContext, useState, useEffect } from "react"
+import React, { useContext, useState, useEffect, useRef } from "react"
 import Timer from "easytimer.js"
-import { BsFillPlayCircleFill, BsFillPauseCircleFill } from "react-icons/bs"
+import {
+  BsFillPlayCircleFill,
+  BsFillPauseCircleFill,
+  BsFillSkipEndFill,
+} from "react-icons/bs"
+import { VscDebugRestart } from "react-icons/vsc"
 import { SettingContext } from "../../pages"
 
 const TimerButtons = (props: TimerButtonProps) => {
   const { timerSettings } = useContext(SettingContext)
-  const { timer, notStarted, setNotStarted, timerType } = props
+  const { timer, notStarted, setNotStarted, timerType, setTimerType } = props
+  const latest = useRef<string>("restart")
   const [timerButton, setTimerButton] = useState<string>(
     timer.isRunning() ? "Pause" : "Start",
   )
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const modalSubmit = () => {
-    timer.reset()
-    if (
-      !(
-        (timerType === "Pomodoro" && timerSettings.autoStartPomodoro) ||
-        (timerType === "Short Break" && timerSettings.autoStartShortTimer) ||
-        (timerType === "Long Break" && timerSettings.autoStartLongTimer)
-      )
-    ) {
-      timer.pause()
-      setNotStarted(true)
-      setTimerButton("Start")
+    if (latest.current === "restart") {
+      timer.reset()
+      if (
+        !(
+          (timerType === "Pomodoro" && timerSettings.autoStartPomodoro) ||
+          (timerType === "Short Break" && timerSettings.autoStartShortTimer) ||
+          (timerType === "Long Break" && timerSettings.autoStartLongTimer)
+        )
+      ) {
+        timer.pause()
+        setNotStarted(true)
+        setTimerButton("Start")
+      } else {
+        setTimerButton("Pause")
+      }
     } else {
-      setTimerButton("Pause")
+      if (timerType === "Pomodoro") {
+        setTimerType("Short Break")
+      } else if (timerType === "Short Break") {
+        setTimerType("Long Break")
+      } else if (timerType === "Long Break") {
+        setTimerType("Pomodoro")
+      }
     }
     onClose()
   }
@@ -56,73 +74,75 @@ const TimerButtons = (props: TimerButtonProps) => {
   }, [timerType])
 
   return (
-    <Box>
-      <Box display="flex">
-        <Box
-          display="flex"
-          justifyContent="center"
-          w="60%"
-          border="3px sold red"
-        >
-          <Button
-            leftIcon={
-              timerButton == "Start" ? (
-                <BsFillPlayCircleFill />
-              ) : (
-                <BsFillPauseCircleFill />
-              )
-            }
-            _focus={{
-              outline: "none",
-            }}
-            onClick={() => {
-              setNotStarted(false)
-              if (timer.isRunning()) {
-                timer.pause()
-                setTimerButton("Start")
-              } else {
-                timer.start()
-                setTimerButton("Pause")
-              }
-            }}
-            w="100%"
-            borderRadius="xl"
-            mr="1"
-            ml="1"
-          >
-            {timerButton}
-          </Button>
-        </Box>
-        {/*
-        <Button
+    <Box display="flex" justifyContent="center">
+      <Fade in={!notStarted}>
+        <IconButton
           disabled={notStarted}
           onClick={() => {
+            latest.current = "restart"
             onOpen()
           }}
-          w="50%"
-          borderRadius="xl"
-          ml="1"
-        >
-          Reset
-        </Button>
-        */}
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Modal Title</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>random text aha blah blah blah.</ModalBody>
-            <ModalFooter>
-              <Button colorScheme="blue" mr={3} onClick={onClose}>
-                Close
-              </Button>
-              <Button variant="solid" onClick={modalSubmit}>
-                Reset
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      </Box>
+          icon={<VscDebugRestart />}
+          aria-label="reset"
+          borderRadius="500"
+        />
+      </Fade>
+      <Button
+        w="25%"
+        ml="2"
+        mr="2"
+        leftIcon={
+          timerButton == "Start" ? (
+            <BsFillPlayCircleFill />
+          ) : (
+            <BsFillPauseCircleFill />
+          )
+        }
+        _focus={{
+          outline: "none",
+        }}
+        onClick={() => {
+          setNotStarted(false)
+          if (timer.isRunning()) {
+            timer.pause()
+            setTimerButton("Start")
+          } else {
+            timer.start()
+            setTimerButton("Pause")
+          }
+        }}
+        borderRadius="xl"
+      >
+        {timerButton}
+      </Button>
+      <Fade in={!notStarted}>
+        <IconButton
+          disabled={notStarted}
+          onClick={() => {
+            latest.current = "skip"
+            onOpen()
+          }}
+          icon={<BsFillSkipEndFill />}
+          aria-label="reset"
+          borderRadius="500"
+        />
+      </Fade>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>random text aha blah blah blah.</ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button variant="solid" onClick={modalSubmit}>
+              Reset
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   )
 }
@@ -132,6 +152,7 @@ interface TimerButtonProps {
   notStarted: boolean
   setNotStarted: React.Dispatch<React.SetStateAction<boolean>>
   timerType: string
+  setTimerType: React.Dispatch<React.SetStateAction<string>>
 }
 
 export default TimerButtons
