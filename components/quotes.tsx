@@ -1,16 +1,16 @@
 import { Box, useColorModeValue } from "@chakra-ui/react"
 import { useState, useEffect } from "react"
-import allQuotes from "../util/quotes.json"
 import axios from "axios"
 
 const Quote = () => {
   const [quote, setQuote] = useState<IQuote>({
-    text: "",
+    content: "",
     author: "",
   })
 
   const getQuotes = () => {
-    axios.get("https://stoic-quotes.com/api/quote").then((response) => {
+    axios.get("https://api.quotable.io/random").then((response) => {
+      console.log(JSON.stringify(response.data))
       setQuote(response.data)
     })
   }
@@ -32,7 +32,7 @@ const Quote = () => {
         bg={useColorModeValue("whiteAlpha.600", "#5D5D64")}
         boxShadow="md"
       >
-        {quote.text}
+        {quote.content}
       </Box>
       <Box
         borderRadius="lg"
@@ -52,14 +52,14 @@ const Quote = () => {
         boxShadow="md"
         bg={useColorModeValue("#E6D7C4", "#3E3E43")}
       >
-        {quote.author}
+        &#8212; {quote.author}
       </Box>
     </Box>
   )
 }
 
 interface IQuote {
-  text: String
+  content: String
   author: String
 }
 
