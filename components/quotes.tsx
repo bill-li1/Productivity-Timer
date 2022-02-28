@@ -10,7 +10,6 @@ const Quote = () => {
 
   const getQuotes = () => {
     axios.get("https://api.quotable.io/random").then((response) => {
-      console.log(JSON.stringify(response.data))
       setQuote(response.data)
     })
   }
