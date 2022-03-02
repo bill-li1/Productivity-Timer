@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react"
 import { BsGearFill } from "react-icons/bs"
 import { FaUserCircle } from "react-icons/fa"
-import { AiFillDatabase } from "react-icons/ai"
+import { BsFillInfoCircleFill } from "react-icons/bs"
 import Settings from "./settings/settings"
 import ComingSoon from "./coming-soon"
 
@@ -51,7 +51,7 @@ const Navbar = () => {
             borderRadius="xl"
             aria-label="Reports"
             ml={3}
-            icon={<AiFillDatabase size={20} />}
+            icon={<BsFillInfoCircleFill size={20} />}
             variant="outline"
             bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
           />
