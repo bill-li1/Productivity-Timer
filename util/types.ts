@@ -26,3 +26,9 @@ export interface ITimerContext {
   timerSettings: ITimerSettings
   setTimerSettings: (value: ITimerSettings) => void
 }
+
+export interface ITodo {
+  id: string
+  completed: boolean
+  description: string
+}

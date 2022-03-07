@@ -1,9 +1,11 @@
 import { Container, Box } from "@chakra-ui/react"
 import { useState, createContext } from "react"
+import { ITimerSettings, ITimerContext } from "../util/types"
 import Navbar from "../components/navbar"
 import Quote from "../components/quotes"
-import { ITimerSettings, ITimerContext } from "../util/types"
 import Timer from "../components/timer/timer"
+import TodoList from "../components/todo-list/todo-list"
+
 
 export const SettingContext = createContext<ITimerContext | null>(null)
 
@@ -32,6 +34,7 @@ const Page = () => {
         <Container maxW="xl" mt={10}>
           <Timer />
           <Quote />
+          <TodoList />
         </Container>
       </Box>
     </SettingContext.Provider>
