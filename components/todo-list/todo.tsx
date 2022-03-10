@@ -12,11 +12,22 @@ const Todo = (props: ITodoProps) => {
   const { todo, removeTodo, toggleCompleted } = props
   return (
     <ListItem>
-      <Checkbox checked={todo.completed} onClick={() => toggleCompleted(todo.id)} />
-      <Text>
-        {todo.description}
+      <Checkbox
+        checked={todo.completed}
+        onClick={() => toggleCompleted(todo.id)}
+      />
+      <Text
+        style={{
+          textDecoration: todo.completed ? "line-through" : null,
+        }}
+      >
+        {todo.completed ? "true" : "false"}
       </Text>
-      <IconButton onClick={() => removeTodo(todo.id)} aria-label='Remove Todo' icon={<AiOutlineCloseCircle />} />
+      <IconButton
+        onClick={() => removeTodo(todo.id)}
+        aria-label="Remove Todo"
+        icon={<AiOutlineCloseCircle />}
+      />
     </ListItem>
   )
 }
