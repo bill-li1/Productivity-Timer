@@ -1,4 +1,5 @@
 import { ITodo } from "../../util/types"
+import { useEffect } from "react"
 import { Text, ListItem, Checkbox, IconButton } from "@chakra-ui/react"
 import { AiOutlineCloseCircle } from "react-icons/ai"
 
@@ -10,20 +11,25 @@ interface ITodoProps {
 
 const Todo = (props: ITodoProps) => {
   const { todo, removeTodo, toggleCompleted } = props
+  console.log(todo.completed)
+  useEffect(() => {
+    console.log(todo.completed)
+  }, [todo.completed])
   return (
-    <ListItem>
+    <ListItem border="3px solid blue" display="flex">
       <Checkbox
-        checked={todo.completed}
-        onClick={() => toggleCompleted(todo.id)}
+        isChecked={todo.completed}
+        onChange={() => toggleCompleted(todo.id)}
       />
       <Text
         style={{
           textDecoration: todo.completed ? "line-through" : null,
         }}
       >
-        {todo.completed ? "true" : "false"}
+        {todo.description}
       </Text>
       <IconButton
+        size="sm"
         onClick={() => removeTodo(todo.id)}
         aria-label="Remove Todo"
         icon={<AiOutlineCloseCircle />}

@@ -26,6 +26,7 @@ const TodoList = () => {
         return todo
       }
     })
+    console.log(newTodos)
     setTodos(newTodos)
   }
 
@@ -35,7 +36,12 @@ const TodoList = () => {
       <TodoForm addTodo={addTodo} />
       <List>
         {todos.map((todo: ITodo) => (
-          <Todo todo={todo} removeTodo={removeTodo} toggleCompleted={toggleCompleted} />
+          <Todo
+            key={todo.id}
+            todo={todo}
+            removeTodo={removeTodo}
+            toggleCompleted={toggleCompleted}
+          />
         ))}
       </List>
     </Box>

@@ -34,13 +34,17 @@ const Todo = (props: ITodoFormProps) => {
   return (
     <form onSubmit={handleSubmit}>
       <Input
+        mt={2}
+        mb={2}
+        border="3px solid red"
         label="Task"
         type="text"
         name="task"
+        variant="unstyled"
+        pluceholder="New Task"
         value={todo.description}
         onChange={handleInputChange}
       />
-      <Button type="submit">Submit</Button>
     </form>
   )
 }
