@@ -1,7 +1,6 @@
 import { ITodo } from "../../util/types"
-import { useEffect } from "react"
-import { Text, ListItem, Checkbox, IconButton } from "@chakra-ui/react"
-import { AiOutlineCloseCircle } from "react-icons/ai"
+import { Box, Text, ListItem } from "@chakra-ui/react"
+import { BsFillTrashFill, BsFileEarmarkPlusFill, BsPencilFill } from "react-icons/bs"
 
 interface ITodoProps {
   todo: ITodo
@@ -11,29 +10,51 @@ interface ITodoProps {
 
 const Todo = (props: ITodoProps) => {
   const { todo, removeTodo, toggleCompleted } = props
-  console.log(todo.completed)
-  useEffect(() => {
-    console.log(todo.completed)
-  }, [todo.completed])
+
   return (
-    <ListItem border="3px solid blue" display="flex">
-      <Checkbox
-        isChecked={todo.completed}
-        onChange={() => toggleCompleted(todo.id)}
-      />
-      <Text
-        style={{
-          textDecoration: todo.completed ? "line-through" : null,
-        }}
-      >
-        {todo.description}
-      </Text>
-      <IconButton
-        size="sm"
-        onClick={() => removeTodo(todo.id)}
-        aria-label="Remove Todo"
-        icon={<AiOutlineCloseCircle />}
-      />
+    <ListItem mt={2}>
+      <Box display="flex" className="TodoLine">
+        <Box w="100%" onClick={() => toggleCompleted(todo.id)}>
+          <Text
+            alignItems="center"
+            display="flex"
+            style={{
+              textDecoration: todo.completed ? "line-through" : null,
+            }}
+          >
+            {todo.description}
+          </Text>
+        </Box>
+        <Box className="Buttons" ml="auto">
+          <Text></Text>
+          <Box
+            display="flex"
+            alignItems="center"
+            onClick={() => removeTodo(todo.id)}
+            aria-label="Remove Todo"
+          >
+            <BsPencilFill size={20} />
+          </Box>
+          <Box
+            display="flex"
+            ml={2}
+            alignItems="center"
+            onClick={() => removeTodo(todo.id)}
+            aria-label="Remove Todo"
+          >
+            <BsFileEarmarkPlusFill size={20} />
+          </Box>
+          <Box
+            display="flex"
+            alignItems="center"
+            ml={2}
+            onClick={() => removeTodo(todo.id)}
+            aria-label="Remove Todo"
+          >
+            <BsFillTrashFill size={20} />
+          </Box>
+        </Box>
+      </Box>
     </ListItem>
   )
 }

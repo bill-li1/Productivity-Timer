@@ -26,14 +26,12 @@ const TodoList = () => {
         return todo
       }
     })
-    console.log(newTodos)
     setTodos(newTodos)
   }
 
   return (
     <Box mt={2}>
       <h2>Todo List</h2>
-      <TodoForm addTodo={addTodo} />
       <List>
         {todos.map((todo: ITodo) => (
           <Todo
@@ -44,6 +42,7 @@ const TodoList = () => {
           />
         ))}
       </List>
+      <TodoForm addTodo={addTodo} />
     </Box>
   )
 }

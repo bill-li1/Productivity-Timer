@@ -1,0 +1,7 @@
+.Buttons {
+  display: none;
+}
+
+.TodoLine:hover .Buttons {
+  display: flex;
+}

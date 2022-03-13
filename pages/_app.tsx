@@ -3,6 +3,7 @@ import Layout from "../components/layouts/main"
 import Fonts from "../components/fonts"
 import theme from "../lib/theme"
 import { AppProps } from "next/app"
+import "../styles.css"
 
 const Website = ({ Component, pageProps, router }: AppProps) => {
   return (
