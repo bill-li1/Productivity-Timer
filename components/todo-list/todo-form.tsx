@@ -12,6 +12,7 @@ const Todo = (props: ITodoFormProps) => {
 
   const defaultTodo: ITodo = {
     id: "",
+    createdAt: new Date(),
     indent: 0,
     description: "",
     completed: false,
@@ -25,7 +26,7 @@ const Todo = (props: ITodoFormProps) => {
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
     if (todo.description.trim()) {
-      addTodo({ ...todo, id: uuidv4() })
+      addTodo({ ...todo, id: uuidv4(), createdAt: new Date() })
       setTodo(defaultTodo)
     }
   }

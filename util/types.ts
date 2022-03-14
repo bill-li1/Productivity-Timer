@@ -29,6 +29,7 @@ export interface ITimerContext {
 
 export interface ITodo {
   id: string
+  createdAt: Date
   indent: number
   completed: boolean
   description: string
