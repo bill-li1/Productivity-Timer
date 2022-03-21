@@ -34,13 +34,11 @@ const Todo = (props: ITodoProps) => {
 
   return (
     <Fade in={true}>
-      <ListItem mt={2}>
+      <ListItem mt={1}>
         <Box display="flex" className="TodoLine">
           <Box w="100%" onClick={() => toggleCompleted(todo.id)}>
             <Box display="flex">
-              <Text fontSize={18}>
-                &#8211;
-              </Text>
+              <Text fontSize={18}>&#8211;</Text>
               <Text
                 ml="5px"
                 fontSize={18}

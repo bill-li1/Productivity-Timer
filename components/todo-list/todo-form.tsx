@@ -32,10 +32,11 @@ const Todo = (props: ITodoFormProps) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} autoComplete="off">
       <Input
         mt={2}
         mb={2}
+        fontSize="18"
         label="Task"
         type="text"
         name="task"
