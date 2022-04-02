@@ -1,25 +1,25 @@
 import { useState, useEffect } from "react"
 import { ITodo } from "../../util/types"
 import { Box, Text, Fade, ListItem } from "@chakra-ui/react"
-import {
-  BsFillTrashFill,
-  BsFileEarmarkPlusFill,
-} from "react-icons/bs"
+import { BsFillTrashFill, BsFileEarmarkPlusFill } from "react-icons/bs"
+import SubForm from "./sub-form"
 
 interface ITodoProps {
   todo: ITodo
   removeTodo: (id: string) => void
   toggleCompleted: (id: string) => void
+  addTodo: (todo: ITodo, id: string) => void
 }
 
 const Todo = (props: ITodoProps) => {
-  const { todo, removeTodo, toggleCompleted } = props
+  const { todo, removeTodo, toggleCompleted, addTodo } = props
   const time: string = todo.createdAt
     .toLocaleTimeString()
     .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3")
 
   const today = new Date()
   const [date, setDate] = useState<string>("")
+  const [subForm, setSubForm] = useState<boolean>(false)
   useEffect(() => {
     switch (todo.createdAt.getDay()) {
       case today.getDay():
@@ -31,9 +31,13 @@ const Todo = (props: ITodoProps) => {
     }
   }, [])
 
+  useEffect(() => {
+    console.log(subForm)
+  }, [subForm])
+
   return (
     <Fade in={true}>
-      <ListItem mt={1} border="3px solid red">
+      <ListItem mt={1} marginLeft={todo.indent * 5}>
         <Box display="flex" className="TodoLine">
           <Box w="100%" onClick={() => toggleCompleted(todo.id)}>
             <Box display="flex">
@@ -47,9 +51,7 @@ const Todo = (props: ITodoProps) => {
                   textDecoration: todo.completed ? "line-through" : null,
                 }}
               >
-                {todo.description}
-                {" "}
-                {todo.indent}
+                {todo.description} {todo.indent}
               </Text>
             </Box>
           </Box>
@@ -80,7 +82,7 @@ const Todo = (props: ITodoProps) => {
               display="flex"
               ml={3}
               alignItems="center"
-              onClick={() => removeTodo(todo.id)}
+              onClick={() => setSubForm(!subForm)}
               aria-label="Remove Todo"
             >
               <BsFileEarmarkPlusFill size={20} />
@@ -97,6 +99,18 @@ const Todo = (props: ITodoProps) => {
           </Box>
         </Box>
       </ListItem>
+      {subForm ? (
+        <Fade in={true}>
+          <Box marginLeft={(todo.indent + 1) * 5}>
+            <SubForm
+              addTodo={addTodo}
+              indent={todo.indent + 1}
+              prevId={todo.id}
+              setSubForm={setSubForm}
+            />
+          </Box>
+        </Fade>
+      ) : null}
     </Fade>
   )
 }

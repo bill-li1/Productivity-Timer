@@ -4,13 +4,14 @@ import { ITodo } from "../../util/types"
 import { v4 as uuidv4 } from "uuid"
 
 interface ISubFormProps {
-  addTodo: (todo: ITodo) => void
+  addTodo: (todo: ITodo, id: string) => void
   indent: number
+  prevId: string
+  setSubForm: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Todo = (props: ISubFormProps) => {
-  const { addTodo, indent } = props
-  console.log(indent)
+const SubForm = (props: ISubFormProps) => {
+  const { addTodo, indent, prevId, setSubForm } = props
 
   const defaultTodo: ITodo = {
     id: "",
@@ -28,8 +29,9 @@ const Todo = (props: ISubFormProps) => {
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
     if (todo.description.trim()) {
-      addTodo({ ...todo, id: uuidv4(), createdAt: new Date() })
+      addTodo({ ...todo, id: uuidv4(), createdAt: new Date() }, prevId)
       setTodo(defaultTodo)
+      setSubForm(false)
     }
   }
 
@@ -38,6 +40,7 @@ const Todo = (props: ISubFormProps) => {
       <Input
         mt={2}
         mb={2}
+        autoFocus
         fontSize="18"
         type="text"
         name="task"
@@ -50,4 +53,4 @@ const Todo = (props: ISubFormProps) => {
   )
 }
 
-export default Todo
+export default SubForm

@@ -4,12 +4,12 @@ import { ITodo } from "../../util/types"
 import { v4 as uuidv4 } from "uuid"
 
 interface ITodoFormProps {
-  addTodo: (todo: ITodo, pos: number) => void
-  todosLength: number
+  addTodo: (todo: ITodo, id: string) => void
+  todoPos: number
 }
 
 const TodoForm = (props: ITodoFormProps) => {
-  const { addTodo, todosLength } = props
+  const { addTodo, todoPos } = props
 
   const defaultTodo: ITodo = {
     id: "",
@@ -27,7 +27,7 @@ const TodoForm = (props: ITodoFormProps) => {
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
     if (todo.description.trim()) {
-      addTodo({ ...todo, id: uuidv4(), createdAt: new Date() }, todosLength)
+      addTodo({ ...todo, id: uuidv4(), createdAt: new Date() }, "new")
       setTodo(defaultTodo)
     }
   }

@@ -7,7 +7,17 @@ import TodoForm from "./todo-form"
 const TodoList = () => {
   const [todos, setTodos] = useState<ITodo[]>([])
 
-  const addTodo = (todo: ITodo, pos: number) => {
+  const findPos = (id: string): number => {
+    for (let i = 0; i < todos.length; i++) {
+      if (todos[i].id === id) {
+        return i + 1
+      }
+    }
+    return todos.length
+  }
+
+  const addTodo = (todo: ITodo, id: string) => {
+    const pos = findPos(id)
     const before: ITodo[] = todos.slice(0, pos)
     const after: ITodo[] = todos.slice(pos, todos.length)
     setTodos([...before, todo, ...after])
@@ -41,10 +51,11 @@ const TodoList = () => {
             todo={todo}
             removeTodo={removeTodo}
             toggleCompleted={toggleCompleted}
+            addTodo={addTodo}
           />
         ))}
       </List>
-      <TodoForm addTodo={addTodo} todosLength={todos.length} />
+      <TodoForm addTodo={addTodo} todoPos={todos.length} />
     </Box>
   )
 }

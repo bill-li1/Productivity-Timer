@@ -12,7 +12,7 @@ import {
 const WarningModal = (props: WarningModalProps) => {
   const { onClose, modalSubmit } = props
   return (
-    <Box border="3px solid red">
+    <Box>
       <ModalOverlay />
       <ModalContent>
       </ModalContent>
