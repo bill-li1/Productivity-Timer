@@ -3,18 +3,19 @@ import { Input } from "@chakra-ui/react"
 import { ITodo } from "../../util/types"
 import { v4 as uuidv4 } from "uuid"
 
-interface ITodoFormProps {
-  addTodo: (todo: ITodo, pos: number) => void
-  todosLength: number
+interface ISubFormProps {
+  addTodo: (todo: ITodo) => void
+  indent: number
 }
 
-const TodoForm = (props: ITodoFormProps) => {
-  const { addTodo, todosLength } = props
+const Todo = (props: ISubFormProps) => {
+  const { addTodo, indent } = props
+  console.log(indent)
 
   const defaultTodo: ITodo = {
     id: "",
     createdAt: new Date(),
-    indent: 0,
+    indent: indent,
     description: "",
     completed: false,
   }
@@ -27,7 +28,7 @@ const TodoForm = (props: ITodoFormProps) => {
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
     if (todo.description.trim()) {
-      addTodo({ ...todo, id: uuidv4(), createdAt: new Date() }, todosLength)
+      addTodo({ ...todo, id: uuidv4(), createdAt: new Date() })
       setTodo(defaultTodo)
     }
   }
@@ -49,4 +50,4 @@ const TodoForm = (props: ITodoFormProps) => {
   )
 }
 
-export default TodoForm
+export default Todo

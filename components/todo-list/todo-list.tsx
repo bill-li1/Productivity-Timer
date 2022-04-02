@@ -7,8 +7,10 @@ import TodoForm from "./todo-form"
 const TodoList = () => {
   const [todos, setTodos] = useState<ITodo[]>([])
 
-  const addTodo = (todo: ITodo) => {
-    setTodos([...todos, todo])
+  const addTodo = (todo: ITodo, pos: number) => {
+    const before: ITodo[] = todos.slice(0, pos)
+    const after: ITodo[] = todos.slice(pos, todos.length)
+    setTodos([...before, todo, ...after])
   }
 
   const removeTodo = (id: string) => {
@@ -42,7 +44,7 @@ const TodoList = () => {
           />
         ))}
       </List>
-      <TodoForm addTodo={addTodo} />
+      <TodoForm addTodo={addTodo} todosLength={todos.length} />
     </Box>
   )
 }

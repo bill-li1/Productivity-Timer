@@ -4,7 +4,6 @@ import { Box, Text, Fade, ListItem } from "@chakra-ui/react"
 import {
   BsFillTrashFill,
   BsFileEarmarkPlusFill,
-  BsPencilFill,
 } from "react-icons/bs"
 
 interface ITodoProps {
@@ -34,7 +33,7 @@ const Todo = (props: ITodoProps) => {
 
   return (
     <Fade in={true}>
-      <ListItem mt={1}>
+      <ListItem mt={1} border="3px solid red">
         <Box display="flex" className="TodoLine">
           <Box w="100%" onClick={() => toggleCompleted(todo.id)}>
             <Box display="flex">
@@ -49,6 +48,8 @@ const Todo = (props: ITodoProps) => {
                 }}
               >
                 {todo.description}
+                {" "}
+                {todo.indent}
               </Text>
             </Box>
           </Box>
