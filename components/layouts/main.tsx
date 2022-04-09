@@ -1,5 +1,5 @@
 import Head from "next/head"
-import Information from "../information"
+import Footer from "../footer"
 import { Box } from "@chakra-ui/react"
 
 const Main = ({ children, router }) => {
@@ -12,8 +12,8 @@ const Main = ({ children, router }) => {
         </Head>
         {children}
       </Box>
-      <Information />
-    </Box>
+      <Footer />
+    </Box >
   )
 }
 

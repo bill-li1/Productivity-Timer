@@ -8,13 +8,13 @@ const IndentedParagraph = styled.div`
   position: absolute;
   left: 50%;
   margin-left: -250px;
-  bottom: 20px;
+  bottom: 10px;
 `
 
 const Footer = () => {
   return (
     <IndentedParagraph>
-      &copy; {new Date().getFullYear()} Takuya Matsuyama. All Rights Reserved.
+      &copy; {new Date().getFullYear()} Bill Li. All Rights Reserved.
     </IndentedParagraph>
   )
 }

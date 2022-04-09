@@ -9,7 +9,7 @@ interface ITodoFormProps {
 }
 
 const TodoForm = (props: ITodoFormProps) => {
-  const { addTodo, todoPos } = props
+  const { addTodo } = props
 
   const defaultTodo: ITodo = {
     id: "",

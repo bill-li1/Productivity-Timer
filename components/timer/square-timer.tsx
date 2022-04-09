@@ -19,7 +19,7 @@ const SquareTimer = (props: TimerProps) => {
       <TimerBox>
         <Text>{timeValues.toString(["minutes", "seconds"])}</Text>
       </TimerBox>
-    </Box >
+    </Box>
   )
 }
 

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Input } from "@chakra-ui/react"
+import { Input, Box, Text } from "@chakra-ui/react"
 import { ITodo } from "../../util/types"
 import { v4 as uuidv4 } from "uuid"
 
@@ -37,18 +37,21 @@ const SubForm = (props: ISubFormProps) => {
 
   return (
     <form onSubmit={handleSubmit} autoComplete="off">
-      <Input
-        mt={2}
-        mb={2}
-        autoFocus
-        fontSize="18"
-        type="text"
-        name="task"
-        variant="unstyled"
-        placeholder="New Task"
-        value={todo.description}
-        onChange={handleInputChange}
-      />
+      <Box display="flex">
+        <Text fontSize={18} mr={2} mt={1}>&#8211;</Text>
+        <Input
+          mt={2}
+          mb={2}
+          autoFocus
+          fontSize="18"
+          type="text"
+          name="task"
+          variant="unstyled"
+          placeholder="New Task"
+          value={todo.description}
+          onChange={handleInputChange}
+        />
+      </Box>
     </form>
   )
 }

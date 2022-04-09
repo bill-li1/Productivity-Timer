@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { ITodo } from "../../util/types"
-import { Box, Text, Fade, ListItem } from "@chakra-ui/react"
+import { Box, Text, Fade, ListItem, useColorModeValue } from "@chakra-ui/react"
 import { BsFillTrashFill, BsFileEarmarkPlusFill } from "react-icons/bs"
 import SubForm from "./sub-form"
 
@@ -31,13 +31,9 @@ const Todo = (props: ITodoProps) => {
     }
   }, [])
 
-  useEffect(() => {
-    console.log(subForm)
-  }, [subForm])
-
   return (
     <Fade in={true}>
-      <ListItem mt={1} marginLeft={todo.indent * 5}>
+      <ListItem mt={1} ml={todo.indent * 4}>
         <Box display="flex" className="TodoLine">
           <Box w="100%" onClick={() => toggleCompleted(todo.id)}>
             <Box display="flex">
@@ -51,14 +47,14 @@ const Todo = (props: ITodoProps) => {
                   textDecoration: todo.completed ? "line-through" : null,
                 }}
               >
-                {todo.description} {todo.indent}
+                {todo.description}
               </Text>
             </Box>
           </Box>
           <Box className="Buttons" ml="auto">
             <Text
               fontSize={16}
-              textColor="gray.400"
+              textColor={useColorModeValue("gray.600", "gray.400")}
               alignItems="center"
               ml={2}
               display="flex"
@@ -69,7 +65,7 @@ const Todo = (props: ITodoProps) => {
             </Text>
             <Text
               fontSize={16}
-              textColor="gray.400"
+              textColor={useColorModeValue("gray.600", "gray.400")}
               alignItems="center"
               display="flex"
               ml={2}
@@ -101,7 +97,7 @@ const Todo = (props: ITodoProps) => {
       </ListItem>
       {subForm ? (
         <Fade in={true}>
-          <Box marginLeft={(todo.indent + 1) * 5}>
+          <Box ml={(todo.indent + 1) * 4}>
             <SubForm
               addTodo={addTodo}
               indent={todo.indent + 1}

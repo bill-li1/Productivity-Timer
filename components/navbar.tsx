@@ -1,25 +1,18 @@
 import Logo from "./logo"
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
+  Spacer,
   Container,
   Box,
   Heading,
   IconButton,
   useColorModeValue,
-  useDisclosure,
 } from "@chakra-ui/react"
-import { BsGearFill } from "react-icons/bs"
 import { FaUserCircle } from "react-icons/fa"
-import { BsFillInfoCircleFill } from "react-icons/bs"
+import Information from "./information"
 import Settings from "./settings/settings"
-import ComingSoon from "./coming-soon"
+// import ComingSoon from "./coming-soon"
 
 const Navbar = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <Box
@@ -46,24 +39,10 @@ const Navbar = () => {
         >
           <Logo />
         </Heading>
-        <Box flex={1} align="right">
-          <IconButton
-            borderRadius="xl"
-            aria-label="Reports"
-            ml={3}
-            icon={<BsFillInfoCircleFill size={20} />}
-            variant="outline"
-            bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
-          />
-          <IconButton
-            borderRadius="xl"
-            aria-label="Settings"
-            ml={3}
-            onClick={onOpen}
-            icon={<BsGearFill size={20} />}
-            variant="outline"
-            bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
-          />
+        <Spacer />
+        <Box>
+          <Information />
+          <Settings />
           <IconButton
             borderRadius="xl"
             aria-label="Profile"
@@ -73,18 +52,8 @@ const Navbar = () => {
             bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
           />
         </Box>
-        <Modal size="lg" isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader fontSize="34" textAlign="center">
-              Settings
-            </ModalHeader>
-            <ModalCloseButton />
-            <Settings onClose={onClose} />
-          </ModalContent>
-        </Modal>
-      </Container>
-    </Box>
+      </Container >
+    </Box >
   )
 }
 
