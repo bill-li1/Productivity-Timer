@@ -37,7 +37,7 @@ const TodoForm = (props: ITodoFormProps) => {
       <Input
         mt={2}
         mb={2}
-        fontSize="18"
+        fontSize={20}
         type="text"
         name="task"
         variant="unstyled"

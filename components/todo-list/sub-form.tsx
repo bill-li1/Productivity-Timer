@@ -38,12 +38,12 @@ const SubForm = (props: ISubFormProps) => {
   return (
     <form onSubmit={handleSubmit} autoComplete="off">
       <Box display="flex">
-        <Text fontSize={18} mr={2} mt={1}>&#8211;</Text>
+        <Text fontSize={18} mr={2} mt="2px">&#8211;</Text>
         <Input
           mt={2}
           mb={2}
           autoFocus
-          fontSize="18"
+          fontSize={18}
           type="text"
           name="task"
           variant="unstyled"

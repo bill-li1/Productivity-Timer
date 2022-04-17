@@ -40,7 +40,7 @@ const Todo = (props: ITodoProps) => {
               <Text fontSize={18}>&#8211;</Text>
               <Text
                 ml="5px"
-                fontSize={18}
+                fontSize={todo.indent > 0 ? 18 : 20}
                 alignItems="center"
                 display="flex"
                 style={{
