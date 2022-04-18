@@ -10,6 +10,7 @@ import {
   ModalCloseButton,
   ModalOverlay,
   ModalContent,
+  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react"
 import React, { useContext, useState, useEffect, useRef } from "react"
@@ -72,6 +73,10 @@ const TimerButtons = (props: TimerButtonProps) => {
       setTimerButton("Pause")
     }
   }, [timerType])
+
+  useEffect(() => {
+    setTimerButton(timer.isRunning() ? "Pause" : "Start")
+  }, [timer.isRunning(), timer.isPaused()])
 
   return (
     <Box display="flex" justifyContent="center">

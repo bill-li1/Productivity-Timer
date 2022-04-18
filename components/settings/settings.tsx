@@ -1,7 +1,7 @@
-import { Box } from "@chakra-ui/react"
+import { useState, useContext, useEffect } from "react"
 import {
   Button,
-  Divider,
+  Box,
   ModalFooter,
   Modal,
   ModalOverlay,
@@ -12,34 +12,53 @@ import {
   useDisclosure,
   useColorModeValue,
 } from "@chakra-ui/react"
-import { useState, useContext } from "react"
-import { ITimerSettings } from "../../util/types"
-import ThemeSetting from "./theme-setting"
-import { BsGearFill } from "react-icons/bs"
-import TimerTypeSetting from "./timer-type-setting"
-import LongBreakSettings from "./long-break-settings"
-import TimerSettings from "./timer-setting"
 import { SettingContext } from "../../pages"
-
-const StyledDivider = () => {
-  return (
-    <Box ml="5" mr="5" mb="2">
-      <Divider />
-    </Box>
-  )
-}
+import { BsGearFill } from "react-icons/bs"
+import { ITempTimerSettings } from "../../util/types"
+import LongBreakSettings from "./long-break-settings"
+import QuoteSetting from "./quote-setting"
+import TimerSettings from "./timer-setting"
+import StyledDivider from "../styled-divider"
+import ThemeSetting from "./theme-setting"
 
 const Settings = () => {
   const { timerSettings, setTimerSettings } = useContext(SettingContext)
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [newTimerSettings, setNewTimerSettings] = useState<ITimerSettings>(
+  const [newTimerSettings, setNewTimerSettings] = useState<ITempTimerSettings>(
     JSON.parse(JSON.stringify(timerSettings)),
   )
 
   const saveButton = () => {
-    setTimerSettings(newTimerSettings)
+    setTimerSettings({
+      ...newTimerSettings,
+      pomodoroTime: parseInt(newTimerSettings.pomodoroTime),
+      shortBreakTime: parseInt(newTimerSettings.shortBreakTime),
+      longBreakTime: parseInt(newTimerSettings.longBreakTime),
+      numBreaks: parseInt(newTimerSettings.numBreaks),
+    })
     onClose()
   }
+
+  const saveButtonDisabled = () => {
+    return (
+      newTimerSettings.pomodoroTime === "" ||
+      newTimerSettings.shortBreakTime === "" ||
+      newTimerSettings.longBreakTime === "" ||
+      newTimerSettings.numBreaks === ""
+    )
+  }
+
+  useEffect(() => {
+    if (!isOpen) {
+      setNewTimerSettings({
+        ...timerSettings,
+        pomodoroTime: timerSettings.pomodoroTime.toString(),
+        shortBreakTime: newTimerSettings.shortBreakTime.toString(),
+        longBreakTime: newTimerSettings.longBreakTime.toString(),
+        numBreaks: newTimerSettings.numBreaks.toString(),
+      })
+    }
+  }, [isOpen])
 
   return (
     <>
@@ -66,6 +85,11 @@ const Settings = () => {
               setTimerSettings={setNewTimerSettings}
             />
             <StyledDivider />
+            <QuoteSetting
+              timerSettings={newTimerSettings}
+              setTimerSettings={setNewTimerSettings}
+            />
+            <StyledDivider />
             <LongBreakSettings
               timerSettings={newTimerSettings}
               setTimerSettings={setNewTimerSettings}
@@ -73,10 +97,6 @@ const Settings = () => {
             <StyledDivider />
             <ThemeSetting />
             <StyledDivider />
-            <TimerTypeSetting
-              timerSettings={newTimerSettings}
-              setTimerSettings={setNewTimerSettings}
-            />
             <ModalFooter mr="8">
               <Button
                 mr="3"
@@ -87,7 +107,12 @@ const Settings = () => {
               >
                 Cancel
               </Button>
-              <Button mr="1" colorScheme="blue" onClick={saveButton}>
+              <Button
+                mr="1"
+                colorScheme="blue"
+                onClick={saveButton}
+                disabled={saveButtonDisabled()}
+              >
                 Save
               </Button>
             </ModalFooter>

@@ -24,7 +24,7 @@ const Navbar = () => {
     >
       <Container
         display="flex"
-        borderBottom="1px solid gray"
+        borderBottom="1.25px solid gray"
         pt={2}
         pb={2}
         pl={0}

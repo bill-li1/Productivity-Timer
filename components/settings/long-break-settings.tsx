@@ -1,5 +1,6 @@
 import {
   NumberInput,
+  Spacer,
   NumberInputField,
   NumberInputStepper,
   NumberIncrementStepper,
@@ -30,13 +31,13 @@ const LongBreakSetting = (props: TimerSettingProps) => {
             </Tooltip>
           </Box>
         </Box>
-        <Box w="25%">
+        <Box w="22%" ml="2">
           <NumberInput
             value={timerSettings.numBreaks}
             onChange={(_, num) => {
               setTimerSettings({
                 ...timerSettings,
-                numBreaks: num,
+                numBreaks: num > 0 ? num : 0,
               })
             }}
             max={999}

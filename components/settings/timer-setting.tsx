@@ -65,14 +65,15 @@ const TimerSetting = (props: TimerSettingProps) => {
               <NumberInput
                 w="85px"
                 value={timerSettings.pomodoroTime}
-                onChange={(_, num) => {
+                onChange={(num) => {
                   setTimerSettings({
                     ...timerSettings,
-                    pomodoroTime: num,
+                    pomodoroTime: num
                   })
                 }}
                 max={999}
-                min={0}
+                step={5}
+                min={1}
                 keepWithinRange={true}
                 size="md"
                 clampValueOnBlur={false}
@@ -109,14 +110,14 @@ const TimerSetting = (props: TimerSettingProps) => {
               <NumberInput
                 w="85px"
                 value={timerSettings.shortBreakTime}
-                onChange={(_, num) => {
+                onChange={(num) => {
                   setTimerSettings({
                     ...timerSettings,
                     shortBreakTime: num,
                   })
                 }}
                 max={999}
-                min={0}
+                min={1}
                 keepWithinRange={true}
                 size="md"
                 clampValueOnBlur={false}
@@ -153,14 +154,14 @@ const TimerSetting = (props: TimerSettingProps) => {
               <NumberInput
                 w="85px"
                 value={timerSettings.longBreakTime}
-                onChange={(_, num) => {
+                onChange={(num) => {
                   setTimerSettings({
                     ...timerSettings,
                     longBreakTime: num,
                   })
                 }}
                 max={999}
-                min={0}
+                min={1}
                 keepWithinRange={true}
                 size="md"
                 clampValueOnBlur={false}

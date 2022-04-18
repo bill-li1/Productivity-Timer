@@ -1,6 +1,7 @@
+import { useState, useEffect } from "react"
 import { Box } from "@chakra-ui/react"
 import { TimeCounter } from "easytimer.js"
-import { Text, useColorModeValue } from "@chakra-ui/react"
+import { Text } from "@chakra-ui/react"
 import "typeface-lato"
 import styled from "@emotion/styled"
 
@@ -13,11 +14,20 @@ const TimerBox = styled.span`
 `
 
 const SquareTimer = (props: TimerProps) => {
-  const { timeValues, color } = props
+  const { timeValues } = props
+  const [hours, setHours] = useState(timeValues.hours)
+
+  useEffect(() => {
+    setHours(timeValues.hours)
+  }, [timeValues.hours])
+
   return (
-    <Box textAlign="center" h="calc(100% - 50px)" pt="18%">
+    <Box textAlign="center" h="calc(100% - 50px)" pt="75px">
       <TimerBox>
-        <Text>{timeValues.toString(["minutes", "seconds"])}</Text>
+        <Text>
+          {(hours > 0 ? hours + ":" : "") +
+            timeValues.toString(["minutes", "seconds"])}
+        </Text>
       </TimerBox>
     </Box>
   )
@@ -25,7 +35,6 @@ const SquareTimer = (props: TimerProps) => {
 
 interface TimerProps {
   timeValues: TimeCounter
-  color: string
 }
 
 export default SquareTimer

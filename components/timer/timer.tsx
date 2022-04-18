@@ -1,8 +1,7 @@
 import { Box, useColorModeValue } from "@chakra-ui/react"
 import { useEffect, useState, useRef, useContext } from "react"
 import useTimer from "easytimer-react-hook"
-import CircleTimer from "./circle-timer"
-import SquareTimer from "./square-timer"
+import SquareTimer from "./timer-display"
 import TimerSelector from "./timer-selector"
 import TimerButtons from "./timer-buttons"
 import { SettingContext } from "../../pages"
@@ -22,17 +21,6 @@ const Timer = () => {
         return timerSettings.shortBreakTime
       case "Long Break":
         return timerSettings.longBreakTime
-    }
-  }
-
-  const returnColor = (timerType: string) => {
-    switch (timerType) {
-      case "Pomodoro":
-        return timerSettings.pomodoroColor
-      case "Short Break":
-        return timerSettings.shortBreakColor
-      case "Long Break":
-        return timerSettings.longBreakColor
     }
   }
 
@@ -62,7 +50,7 @@ const Timer = () => {
     timerSettings.shortBreakTime,
     timerSettings.longBreakTime,
     timerSettings.numBreaks,
-    timerSettings.circleTimer,
+    timerSettings.hideQuote,
   ])
 
   useEffect(() => {
@@ -88,8 +76,8 @@ const Timer = () => {
     <Box
       bgColor={useColorModeValue("#E6D7C4", "#3E3E43")}
       borderRadius="20px"
-      h="300"
-      mb="30"
+      h="275px"
+      mb="30px"
       p="10px"
     >
       <TimerSelector
@@ -98,17 +86,7 @@ const Timer = () => {
         setTimerType={setTimerType}
       />
       <Box height="calc(100% - 35px)">
-        {timerSettings.circleTimer ? (
-          <CircleTimer
-            timeValues={timer.getTimeValues()}
-            color={returnColor(timerType)}
-          />
-        ) : (
-          <SquareTimer
-            timeValues={timer.getTimeValues()}
-            color={returnColor(timerType)}
-          />
-        )}
+        <SquareTimer timeValues={timer.getTimeValues()} />
         <TimerButtons
           timer={timer}
           notStarted={notStarted}

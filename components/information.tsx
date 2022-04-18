@@ -15,6 +15,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react"
 import { BsFillInfoCircleFill } from "react-icons/bs"
+import StyledDivider from './styled-divider'
 import styled from "@emotion/styled"
 
 const Paragraph = styled.p`
@@ -42,7 +43,7 @@ const Information = () => {
         variant="outline"
         bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
       />
-      <Modal size="4xl" isOpen={isOpen} onClose={onClose}>
+      <Modal size="2xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader fontSize="34" textAlign="center">
@@ -50,7 +51,8 @@ const Information = () => {
           </ModalHeader>
           <ModalCloseButton />
           <Box>
-            <Container pb={6} maxW="container.sm">
+            <StyledDivider />
+            <Container pb={6} pt={2} maxW="container.sm">
               <Box>
                 <Heading pb={3} as="h3" variant="section-title">
                   What is Pomofocus?
@@ -100,18 +102,6 @@ const Information = () => {
               </Box>
             </Container>
           </Box>
-
-          <ModalFooter mr="8">
-            <Button
-              mr="3"
-              _hover={{}}
-              onClick={onClose}
-              bg={useColorModeValue("#808080", "#A9A9A9")}
-              textColor={useColorModeValue("white", "black")}
-            >
-              Cancel
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
