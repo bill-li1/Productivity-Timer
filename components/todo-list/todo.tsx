@@ -11,6 +11,14 @@ interface ITodoProps {
   addTodo: (todo: ITodo, id: string) => void
 }
 
+const getFormattedDate = (date: Date) => {
+  let year = date.getFullYear().toString().slice(2, 4);
+  let month = (1 + date.getMonth()).toString().padStart(2, '0');
+  let day = date.getDate().toString().padStart(2, '0');
+
+  return month + '/' + day + '/' + year;
+}
+
 const Todo = (props: ITodoProps) => {
   const { todo, removeTodo, toggleCompleted, addTodo } = props
   const time: string = todo.createdAt
@@ -18,8 +26,9 @@ const Todo = (props: ITodoProps) => {
     .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3")
 
   const today = new Date()
-  const [date, setDate] = useState<string>("")
+  const [date, setDate] = useState<string>(getFormattedDate(today))
   const [subForm, setSubForm] = useState<boolean>(false)
+
   useEffect(() => {
     switch (todo.createdAt.getDay()) {
       case today.getDay():
@@ -37,10 +46,14 @@ const Todo = (props: ITodoProps) => {
         <Box display="flex" className="TodoLine">
           <Box w="100%" onClick={() => toggleCompleted(todo.id)}>
             <Box display="flex">
-              <Text fontSize={18}>&#8211;</Text>
+              {todo.indent > 0 ? (
+                <Text fontSize={18}>&#8226;</Text>
+              ) : (
+                <Text fontSize={18}>&#8211;</Text>
+              )}
               <Text
                 ml="5px"
-                fontSize={todo.indent > 0 ? 18 : 20}
+                fontSize={todo.indent > 0 ? 17 : 18}
                 alignItems="center"
                 display="flex"
                 style={{

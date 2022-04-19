@@ -10,7 +10,7 @@ const TimerBox = styled.span`
   font-size: 120px;
   font-weight: bold;
   line-height: 15px;
-  letter-spacing: 5px;
+  letter-spacing: 6px;
 `
 
 const SquareTimer = (props: TimerProps) => {

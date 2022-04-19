@@ -1,8 +1,18 @@
 import { useState } from "react"
-import { Box, List } from "@chakra-ui/react"
+import { Box, List, Text, Divider } from "@chakra-ui/react"
 import { ITodo } from "../../util/types"
 import Todo from "./todo"
+import Footer from "./footer"
 import TodoForm from "./todo-form"
+import styled from "@emotion/styled"
+
+const TimerBox = styled.span`
+  font-family: Lato;
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 15px;
+  text-align: center;
+`
 
 const TodoList = () => {
   const [todos, setTodos] = useState<ITodo[]>([])
@@ -42,9 +52,14 @@ const TodoList = () => {
   }
 
   return (
-    <Box mt={2}>
-      <h2>Todo List</h2>
-      <List>
+    <Box mt={8}>
+      <Box mb={5}>
+        <TimerBox>
+          <Text>Todo List</Text>
+        </TimerBox>
+      </Box>
+      <Divider />
+      <List mt={4}>
         {todos.map((todo: ITodo) => (
           <Todo
             key={todo.id}
@@ -56,6 +71,8 @@ const TodoList = () => {
         ))}
       </List>
       <TodoForm addTodo={addTodo} todoPos={todos.length} />
+      <Divider />
+      <Footer />
     </Box>
   )
 }
