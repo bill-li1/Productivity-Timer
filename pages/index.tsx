@@ -36,7 +36,7 @@ const Page = () => {
           <TodoList />
         </Container>
       </Box>
-    </SettingContext.Provider>
+    </SettingContext.Provider >
   )
 }
 

@@ -1,18 +1,18 @@
 import Head from "next/head"
-import Footer from "../footer"
 import { Box } from "@chakra-ui/react"
+import Footer from "../footer"
 
-const Main = ({ children, router }) => {
+const Main = ({ children }) => {
   return (
     <Box as="main">
-      <Box h="100vh">
+      <Box minH="100vh" pb={12}>
         <Head>
           <meta name="viewport" content="initial-scale=1, width=device-width" />
           <title> Pomodoro Timer - Homepage </title>
         </Head>
         {children}
+        <Footer />
       </Box>
-      <Footer />
     </Box >
   )
 }

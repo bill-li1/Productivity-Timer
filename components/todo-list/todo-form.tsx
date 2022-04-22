@@ -37,15 +37,16 @@ const TodoForm = (props: ITodoFormProps) => {
       <Input
         mt={2}
         mb={2}
-        fontSize={20}
+        ml={1}
+        fontSize={18}
         type="text"
         name="task"
         variant="unstyled"
-        placeholder="New Task"
+        placeholder="Enter a new task..."
         value={todo.description}
         onChange={handleInputChange}
       />
-    </form>
+    </form >
   )
 }
 

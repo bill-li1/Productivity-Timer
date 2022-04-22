@@ -10,7 +10,6 @@ import {
   ModalCloseButton,
   ModalOverlay,
   ModalContent,
-  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react"
 import React, { useContext, useState, useEffect, useRef } from "react"

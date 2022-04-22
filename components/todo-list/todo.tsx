@@ -1,33 +1,31 @@
 import { useState, useEffect } from "react"
 import { ITodo } from "../../util/types"
-import { Box, Text, Fade, ListItem, useColorModeValue } from "@chakra-ui/react"
+import { Box, Spacer, Text, ListItem, useColorModeValue } from "@chakra-ui/react"
 import { BsFillTrashFill, BsFileEarmarkPlusFill } from "react-icons/bs"
-import SubForm from "./sub-form"
 
 interface ITodoProps {
   todo: ITodo
   removeTodo: (id: string) => void
   toggleCompleted: (id: string) => void
-  addTodo: (todo: ITodo, id: string) => void
+  openSubForm: (id: string) => void
 }
 
 const getFormattedDate = (date: Date) => {
-  let year = date.getFullYear().toString().slice(2, 4);
-  let month = (1 + date.getMonth()).toString().padStart(2, '0');
-  let day = date.getDate().toString().padStart(2, '0');
+  let year = date.getFullYear().toString().slice(2, 4)
+  let month = (1 + date.getMonth()).toString().padStart(2, "0")
+  let day = date.getDate().toString().padStart(2, "0")
 
-  return month + '/' + day + '/' + year;
+  return month + "/" + day + "/" + year
 }
 
 const Todo = (props: ITodoProps) => {
-  const { todo, removeTodo, toggleCompleted, addTodo } = props
+  const { todo, removeTodo, toggleCompleted, openSubForm } = props
   const time: string = todo.createdAt
     .toLocaleTimeString()
     .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3")
 
   const today = new Date()
   const [date, setDate] = useState<string>(getFormattedDate(today))
-  const [subForm, setSubForm] = useState<boolean>(false)
 
   useEffect(() => {
     switch (todo.createdAt.getDay()) {
@@ -41,9 +39,9 @@ const Todo = (props: ITodoProps) => {
   }, [])
 
   return (
-    <Fade in={true}>
-      <ListItem mt={1} ml={todo.indent * 4}>
-        <Box display="flex" className="TodoLine">
+    <Box>
+      <ListItem mt={1}>
+        <Box display="flex" className="TodoLine" ml={todo.indent * 8}>
           <Box w="100%" onClick={() => toggleCompleted(todo.id)}>
             <Box display="flex">
               {todo.indent > 0 ? (
@@ -87,15 +85,17 @@ const Todo = (props: ITodoProps) => {
             >
               {time}
             </Text>
-            <Box
-              display="flex"
-              ml={3}
-              alignItems="center"
-              onClick={() => setSubForm(!subForm)}
-              aria-label="Remove Todo"
-            >
-              <BsFileEarmarkPlusFill size={20} />
-            </Box>
+            {todo.indent < 3 ? (
+              <Box
+                display="flex"
+                ml={3}
+                alignItems="center"
+                onClick={() => openSubForm(todo.id)}
+                aria-label="Remove Todo"
+              >
+                <BsFileEarmarkPlusFill size={20} />
+              </Box>
+            ) : null}
             <Box
               display="flex"
               alignItems="center"
@@ -108,19 +108,7 @@ const Todo = (props: ITodoProps) => {
           </Box>
         </Box>
       </ListItem>
-      {subForm ? (
-        <Fade in={true}>
-          <Box ml={(todo.indent + 1) * 4}>
-            <SubForm
-              addTodo={addTodo}
-              indent={todo.indent + 1}
-              prevId={todo.id}
-              setSubForm={setSubForm}
-            />
-          </Box>
-        </Fade>
-      ) : null}
-    </Fade>
+    </Box>
   )
 }
 

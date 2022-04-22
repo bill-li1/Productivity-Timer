@@ -1,21 +1,17 @@
-import styled from "@emotion/styled"
-
-const IndentedParagraph = styled.div`
-  text-align: center;
-  width: 500px;
-  opacity: 0.5;
-  font-size: small;
-  position: absolute;
-  left: 50%;
-  margin-left: -250px;
-  bottom: 10px;
-`
+import { Text } from "@chakra-ui/react"
 
 const Footer = () => {
   return (
-    <IndentedParagraph>
+    <Text
+      textAlign="center"
+      width="100%"
+      opacity="0.6"
+      fontSize="small"
+      position="absolute"
+      bottom="2"
+    >
       &copy; {new Date().getFullYear()} Bill Li. All Rights Reserved.
-    </IndentedParagraph>
+    </Text>
   )
 }
 
