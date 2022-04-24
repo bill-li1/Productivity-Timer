@@ -25,6 +25,7 @@ const TodoForm = (props: ITodoFormProps) => {
   }
 
   const handleSubmit = (e: React.SyntheticEvent) => {
+    // handle submit
     e.preventDefault()
     if (todo.description.trim()) {
       addTodo({ ...todo, id: uuidv4(), createdAt: new Date() }, "new")
