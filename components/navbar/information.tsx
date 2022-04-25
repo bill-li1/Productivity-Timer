@@ -15,7 +15,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react"
 import { BsFillInfoCircleFill } from "react-icons/bs"
-import StyledDivider from './styled-divider'
+import StyledDivider from '../styled-divider'
 import styled from "@emotion/styled"
 
 const Paragraph = styled.p`

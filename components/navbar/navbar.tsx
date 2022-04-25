@@ -4,12 +4,11 @@ import {
   Container,
   Box,
   Heading,
-  IconButton,
   useColorModeValue,
 } from "@chakra-ui/react"
-import { FaUserCircle } from "react-icons/fa"
 import Information from "./information"
-import Settings from "./settings/settings"
+import Settings from "../settings/settings"
+import Profile from "./profile"
 // import ComingSoon from "./coming-soon"
 
 const Navbar = () => {
@@ -43,14 +42,7 @@ const Navbar = () => {
         <Box>
           <Information />
           <Settings />
-          <IconButton
-            borderRadius="xl"
-            aria-label="Profile"
-            ml={3}
-            icon={<FaUserCircle size={20} />}
-            variant="outline"
-            bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
-          />
+          <Profile />
         </Box>
       </Container >
     </Box >

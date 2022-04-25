@@ -1,7 +1,7 @@
 import { Container, Box } from "@chakra-ui/react"
 import { useState, createContext } from "react"
 import { ITimerSettings, ITimerContext } from "../util/types"
-import Navbar from "../components/navbar"
+import Navbar from "../components/navbar/navbar"
 import Quote from "../components/quotes"
 import Timer from "../components/timer/timer"
 import TodoList from "../components/todo-list/todo-list"

@@ -1,3 +1,5 @@
-- remove the bottom information page and add an information modal with the same text
-- add todo list
-- add circle timer functionality
+add framer motion
+change color of divider (maybe use border bottom)
+move delete all todos / delete completed todos to top right
+add local storage so tasks remain after refresh
+deploy!!!

@@ -65,7 +65,7 @@ const Settings = () => {
       <IconButton
         borderRadius="xl"
         aria-label="Settings"
-        ml={3}
+        ml={2}
         onClick={onOpen}
         icon={<BsGearFill size={20} />}
         variant="outline"

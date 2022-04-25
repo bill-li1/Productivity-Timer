@@ -12,7 +12,6 @@ const TimerBox = styled.span`
   font-size: 28px;
   font-weight: bold;
   line-height: 15px;
-  text-align: center;
 `
 
 const TodoList = () => {
@@ -28,6 +27,10 @@ const TodoList = () => {
       }
     }
     return todos.length
+  }
+
+  const removeAllTodos = () => {
+    setTodos([]);
   }
 
   const openSubForm = (id: string) => {
@@ -118,7 +121,7 @@ const TodoList = () => {
       </List>
       <TodoForm addTodo={addTodo} todoPos={todos.length} />
       <Divider />
-      <Footer />
+      <Footer numTodos={todos.length} removeAllTodos={removeAllTodos} />
     </Box >
   )
 }
