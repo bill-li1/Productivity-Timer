@@ -13,7 +13,7 @@ const TimerBox = styled.span`
   letter-spacing: 6px;
 `
 
-const SquareTimer = (props: TimerProps) => {
+const Timer = (props: TimerProps) => {
   const { timeValues } = props
   const [hours, setHours] = useState(timeValues.hours)
 
@@ -37,4 +37,4 @@ interface TimerProps {
   timeValues: TimeCounter
 }
 
-export default SquareTimer
+export default Timer

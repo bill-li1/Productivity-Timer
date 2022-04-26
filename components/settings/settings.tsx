@@ -21,6 +21,8 @@ import TimerSettings from "./timer-setting"
 import StyledDivider from "../styled-divider"
 import ThemeSetting from "./theme-setting"
 
+const SETTING_LOCAL_STORAGE_KEY = "todo-list-settings"
+
 const Settings = () => {
   const { timerSettings, setTimerSettings } = useContext(SettingContext)
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -59,6 +61,18 @@ const Settings = () => {
       })
     }
   }, [isOpen])
+
+  useEffect(() => {
+    const storageSettings = JSON.parse(localStorage.getItem(SETTING_LOCAL_STORAGE_KEY))
+    if (timerSettings) {
+      setTimerSettings(storageSettings)
+      setNewTimerSettings(storageSettings)
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem(SETTING_LOCAL_STORAGE_KEY, JSON.stringify(timerSettings));
+  }, [timerSettings]);
 
   return (
     <>

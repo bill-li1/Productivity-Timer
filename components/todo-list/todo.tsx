@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { ITodo } from "../../util/types"
-import { Box, Spacer, Text, ListItem, useColorModeValue } from "@chakra-ui/react"
+import { Box, Text, ListItem, useColorModeValue } from "@chakra-ui/react"
 import { BsFillTrashFill, BsFileEarmarkPlusFill } from "react-icons/bs"
 
 interface ITodoProps {
@@ -20,7 +20,8 @@ const getFormattedDate = (date: Date) => {
 
 const Todo = (props: ITodoProps) => {
   const { todo, removeTodo, toggleCompleted, openSubForm } = props
-  const time: string = todo.createdAt
+  const actualDate: Date = new Date(todo.createdAt);
+  const time: string = actualDate
     .toLocaleTimeString()
     .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3")
 
@@ -28,7 +29,7 @@ const Todo = (props: ITodoProps) => {
   const [date, setDate] = useState<string>(getFormattedDate(today))
 
   useEffect(() => {
-    switch (todo.createdAt.getDay()) {
+    switch (actualDate.getDay()) {
       case today.getDay():
         setDate("Today")
         break

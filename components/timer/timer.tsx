@@ -1,7 +1,7 @@
 import { Box, useColorModeValue } from "@chakra-ui/react"
 import { useEffect, useState, useRef, useContext } from "react"
 import useTimer from "easytimer-react-hook"
-import SquareTimer from "./timer-display"
+import TimerDisplay from "./timer-display"
 import TimerSelector from "./timer-selector"
 import TimerButtons from "./timer-buttons"
 import { SettingContext } from "../../pages"
@@ -29,7 +29,6 @@ const Timer = () => {
   useEffect(() => {
     timer.stop()
     timer.start({
-      // startValues: { minutes: /* returnTime(timerType) */ 0, seconds: 3 },
       startValues: { minutes: returnTime(timerType), seconds: 0 },
       target: { minutes: 0, seconds: 0 },
       countdown: true,
@@ -39,7 +38,8 @@ const Timer = () => {
         (timerType === "Pomodoro" && timerSettings.autoStartPomodoro) ||
         (timerType === "Short Break" && timerSettings.autoStartShortTimer) ||
         (timerType === "Long Break" && timerSettings.autoStartLongTimer)
-      )
+      ) ||
+      skipFirstRender.current
     ) {
       timer.pause()
       setNotStarted(true)
@@ -86,7 +86,7 @@ const Timer = () => {
         setTimerType={setTimerType}
       />
       <Box height="calc(100% - 35px)">
-        <SquareTimer timeValues={timer.getTimeValues()} />
+        <TimerDisplay timeValues={timer.getTimeValues()} />
         <TimerButtons
           timer={timer}
           notStarted={notStarted}
