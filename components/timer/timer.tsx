@@ -8,10 +8,10 @@ import { SettingContext } from "../../pages"
 
 const Timer = () => {
   const { timerSettings } = useContext(SettingContext)
-  const skipFirstRender = useRef<boolean>(false)
   const [notStarted, setNotStarted] = useState<boolean>(true)
-  const longBreakCounter = useRef<number>(0)
   const [timer, isTargetAchieved] = useTimer({ updateWhenTargetAchieved: true })
+  const longBreakCounter = useRef<number>(0)
+  const skipFirstRender = useRef<boolean>(false)
 
   const returnTime = (timerType: string) => {
     switch (timerType) {
