@@ -1,5 +1,4 @@
 add framer motion
 change color of divider (maybe use border bottom)
-move delete all todos / delete completed todos to top right
-add local storage so tasks remain after refresh
+find name for domain
 deploy!!!
