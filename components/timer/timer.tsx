@@ -89,6 +89,7 @@ const Timer = () => {
         <TimerDisplay timeValues={timer.getTimeValues()} />
         <TimerButtons
           timer={timer}
+          skipFirstRender={skipFirstRender.current}
           notStarted={notStarted}
           setNotStarted={setNotStarted}
           timerType={timerType}

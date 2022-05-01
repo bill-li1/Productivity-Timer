@@ -21,15 +21,51 @@ import {
 } from "react-icons/bs"
 import { VscDebugRestart } from "react-icons/vsc"
 import { SettingContext } from "../../pages"
+import { motion } from "framer-motion"
 
 const TimerButtons = (props: TimerButtonProps) => {
   const { timerSettings } = useContext(SettingContext)
-  const { timer, notStarted, setNotStarted, timerType, setTimerType } = props
+  const {
+    timer,
+    skipFirstRender,
+    notStarted,
+    setNotStarted,
+    timerType,
+    setTimerType,
+  } = props
   const latest = useRef<string>("restart")
   const [timerButton, setTimerButton] = useState<string>(
     timer.isRunning() ? "Pause" : "Start",
   )
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const timerButtonOnClick = () => {
+    if (latest.current === "restart") {
+      timer.reset()
+      if (
+        !(
+          (timerType === "Pomodoro" && timerSettings.autoStartPomodoro) ||
+          (timerType === "Short Break" && timerSettings.autoStartShortTimer) ||
+          (timerType === "Long Break" && timerSettings.autoStartLongTimer)
+        ) ||
+        skipFirstRender
+      ) {
+        timer.pause()
+        setNotStarted(true)
+        setTimerButton("Start")
+      } else {
+        setTimerButton("Pause")
+      }
+    } else {
+      if (timerType === "Pomodoro") {
+        setTimerType("Short Break")
+      } else if (timerType === "Short Break") {
+        setTimerType("Long Break")
+      } else if (timerType === "Long Break") {
+        setTimerType("Pomodoro")
+      }
+    }
+  }
 
   const modalSubmit = () => {
     if (latest.current === "restart") {
@@ -39,7 +75,8 @@ const TimerButtons = (props: TimerButtonProps) => {
           (timerType === "Pomodoro" && timerSettings.autoStartPomodoro) ||
           (timerType === "Short Break" && timerSettings.autoStartShortTimer) ||
           (timerType === "Long Break" && timerSettings.autoStartLongTimer)
-        )
+        ) ||
+        skipFirstRender
       ) {
         timer.pause()
         setNotStarted(true)
@@ -65,7 +102,8 @@ const TimerButtons = (props: TimerButtonProps) => {
         (timerType === "Pomodoro" && timerSettings.autoStartPomodoro) ||
         (timerType === "Short Break" && timerSettings.autoStartShortTimer) ||
         (timerType === "Long Break" && timerSettings.autoStartLongTimer)
-      )
+      ) ||
+      skipFirstRender
     ) {
       setTimerButton("Start")
     } else {
@@ -77,14 +115,26 @@ const TimerButtons = (props: TimerButtonProps) => {
     setTimerButton(timer.isRunning() ? "Pause" : "Start")
   }, [timer.isRunning(), timer.isPaused()])
 
+  useEffect(() => {
+    console.log(latest.current)
+  }, [latest.current])
+
   return (
     <Box display="flex" justifyContent="center">
       <Fade in={!notStarted}>
         <IconButton
+          as={motion.button}
+          whileHover={{ scale: 1.075 }}
+          whileTap={{ scale: 0.925 }}
+          transitionDuration="75ms"
           disabled={notStarted}
           onClick={() => {
             latest.current = "restart"
-            onOpen()
+            if (timer.isRunning()) {
+              onOpen()
+            } else {
+              timerButtonOnClick()
+            }
           }}
           icon={<VscDebugRestart />}
           aria-label="reset"
@@ -92,9 +142,13 @@ const TimerButtons = (props: TimerButtonProps) => {
         />
       </Fade>
       <Button
+        as={motion.button}
+        whileHover={{ scale: 1.025 }}
+        whileTap={{ scale: 0.975 }}
+        transitionDuration="75ms"
         w="25%"
-        ml="2"
-        mr="2"
+        ml="2.5"
+        mr="2.5"
         leftIcon={
           timerButton == "Start" ? (
             <BsFillPlayCircleFill />
@@ -121,10 +175,18 @@ const TimerButtons = (props: TimerButtonProps) => {
       </Button>
       <Fade in={!notStarted}>
         <IconButton
+          as={motion.button}
+          whileHover={{ scale: 1.075 }}
+          whileTap={{ scale: 0.925 }}
+          transitionDuration="75ms"
           disabled={notStarted}
           onClick={() => {
             latest.current = "skip"
-            onOpen()
+            if (timer.isRunning()) {
+              onOpen()
+            } else {
+              timerButtonOnClick()
+            }
           }}
           icon={<BsFillSkipEndFill />}
           aria-label="reset"
@@ -153,6 +215,7 @@ const TimerButtons = (props: TimerButtonProps) => {
 
 interface TimerButtonProps {
   timer: Timer
+  skipFirstRender: boolean
   notStarted: boolean
   setNotStarted: React.Dispatch<React.SetStateAction<boolean>>
   timerType: string
