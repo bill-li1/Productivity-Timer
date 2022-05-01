@@ -1,4 +1,6 @@
-add framer motion
-change color of divider (maybe use border bottom)
-find name for domain
+places to add framer motion (in order of importance)
+- start button (bigger on hover, smaller on click)
+- animate todo list (adding and deleting)
+- animate appear and disappear of side button
+
 deploy!!!
