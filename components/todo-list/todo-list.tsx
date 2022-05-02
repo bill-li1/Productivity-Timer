@@ -7,7 +7,7 @@ import Footer from "./footer"
 import TodoForm from "./todo-form"
 import SubForm from "./sub-form"
 import styled from "@emotion/styled"
-
+import { AnimatePresence } from "framer-motion"
 
 const TimerBox = styled.span`
   font-family: Lato;
@@ -111,28 +111,30 @@ const TodoList = () => {
       </Box>
       <Divider />
       <List mt={todos.length > 0 ? 2 : 0}>
-        {todos.map((todo: ITodo) => (
-          <Fade key={todo.id} in={true} unmountOnExit={true}>
-            <Todo
-              todo={todo}
-              removeTodo={removeTodo}
-              toggleCompleted={toggleCompleted}
-              openSubForm={openSubForm}
-            />
-            {subFormOpen && subFormPosition === todo.id ? (
-              <Fade in={true}>
-                <Box ml={subFormIndent.current * 8}>
-                  <SubForm
-                    addTodo={addTodo}
-                    indent={subFormIndent.current}
-                    prevId={todo.id}
-                    setSubForm={() => setSubFormOpen(false)}
-                  />
-                </Box>
-              </Fade>
-            ) : null}
-          </Fade>
-        ))}
+        <AnimatePresence>
+          {todos.map((todo: ITodo) => (
+            <Fade key={todo.id} in={true} unmountOnExit={true}>
+              <Box key={todo.id}>
+                <Todo
+                  todo={todo}
+                  removeTodo={removeTodo}
+                  toggleCompleted={toggleCompleted}
+                  openSubForm={openSubForm}
+                />
+                {subFormOpen && subFormPosition === todo.id ? (
+                  <Box ml={subFormIndent.current * 8}>
+                    <SubForm
+                      addTodo={addTodo}
+                      indent={subFormIndent.current}
+                      prevId={todo.id}
+                      setSubForm={() => setSubFormOpen(false)}
+                    />
+                  </Box>
+                ) : null}
+              </Box>
+            </Fade>
+          ))}
+        </AnimatePresence>
       </List>
       <TodoForm addTodo={addTodo} todoPos={todos.length} />
       <Footer numTodos={todos.length - checkedTodos} />

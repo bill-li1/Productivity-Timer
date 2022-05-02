@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { ITodo } from "../../util/types"
 import { Box, Text, ListItem, useColorModeValue } from "@chakra-ui/react"
 import { BsFillTrashFill, BsFileEarmarkPlusFill } from "react-icons/bs"
+import { motion } from "framer-motion"
 
 interface ITodoProps {
   todo: ITodo
@@ -41,7 +42,13 @@ const Todo = (props: ITodoProps) => {
 
   return (
     <Box>
-      <ListItem mt={1}>
+      <ListItem
+        mt={1}
+      //as={motion.div}
+      //initial={{ opacity: 0, scale: 0 }}
+      //animate={{ opacity: 1, scale: 1 }}
+      //exit={{ opacity: 0, scale: 0 }}
+      >
         <Box display="flex" className="TodoLine" ml={todo.indent * 8}>
           <Box w="100%" onClick={() => toggleCompleted(todo.id)}>
             <Box display="flex">
