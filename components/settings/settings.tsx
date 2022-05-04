@@ -1,4 +1,3 @@
-import { useState, useContext, useEffect } from "react"
 import {
   Button,
   Box,
@@ -12,6 +11,7 @@ import {
   useDisclosure,
   useColorModeValue,
 } from "@chakra-ui/react"
+import { useState, useContext, useEffect } from "react"
 import { SettingContext } from "../../pages"
 import { BsGearFill } from "react-icons/bs"
 import { ITempTimerSettings } from "../../util/types"
@@ -46,7 +46,19 @@ const Settings = () => {
       newTimerSettings.pomodoroTime === "" ||
       newTimerSettings.shortBreakTime === "" ||
       newTimerSettings.longBreakTime === "" ||
-      newTimerSettings.numBreaks === ""
+      newTimerSettings.numBreaks === "" ||
+      newTimerSettings.pomodoroTime.toString().includes("-") ||
+      newTimerSettings.shortBreakTime.toString().includes("-") ||
+      newTimerSettings.longBreakTime.toString().includes("-") ||
+      newTimerSettings.numBreaks.toString().includes("-") ||
+      newTimerSettings.pomodoroTime.toString().includes("e") ||
+      newTimerSettings.shortBreakTime.toString().includes("e") ||
+      newTimerSettings.longBreakTime.toString().includes("e") ||
+      newTimerSettings.numBreaks.toString().includes("e") ||
+      newTimerSettings.pomodoroTime.toString().includes("E") ||
+      newTimerSettings.shortBreakTime.toString().includes("E") ||
+      newTimerSettings.longBreakTime.toString().includes("E") ||
+      newTimerSettings.numBreaks.toString().includes("E")
     )
   }
 
@@ -63,16 +75,21 @@ const Settings = () => {
   }, [isOpen])
 
   useEffect(() => {
-    const storageSettings = JSON.parse(localStorage.getItem(SETTING_LOCAL_STORAGE_KEY))
-    if (timerSettings) {
+    const storageSettings = JSON.parse(
+      localStorage.getItem(SETTING_LOCAL_STORAGE_KEY),
+    )
+    if (storageSettings) {
       setTimerSettings(storageSettings)
       setNewTimerSettings(storageSettings)
     }
   }, [])
 
   useEffect(() => {
-    localStorage.setItem(SETTING_LOCAL_STORAGE_KEY, JSON.stringify(timerSettings));
-  }, [timerSettings]);
+    localStorage.setItem(
+      SETTING_LOCAL_STORAGE_KEY,
+      JSON.stringify(timerSettings),
+    )
+  }, [timerSettings])
 
   return (
     <>

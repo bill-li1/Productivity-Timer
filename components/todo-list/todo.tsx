@@ -4,13 +4,6 @@ import { Box, Text, ListItem, useColorModeValue } from "@chakra-ui/react"
 import { BsFillTrashFill, BsFileEarmarkPlusFill } from "react-icons/bs"
 import { motion } from "framer-motion"
 
-interface ITodoProps {
-  todo: ITodo
-  removeTodo: (id: string) => void
-  toggleCompleted: (id: string) => void
-  openSubForm: (id: string) => void
-}
-
 const getFormattedDate = (date: Date) => {
   let year = date.getFullYear().toString().slice(2, 4)
   let month = (1 + date.getMonth()).toString().padStart(2, "0")
@@ -21,7 +14,7 @@ const getFormattedDate = (date: Date) => {
 
 const Todo = (props: ITodoProps) => {
   const { todo, removeTodo, toggleCompleted, openSubForm } = props
-  const actualDate: Date = new Date(todo.createdAt);
+  const actualDate: Date = new Date(todo.createdAt)
   const time: string = actualDate
     .toLocaleTimeString()
     .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3")
@@ -44,10 +37,10 @@ const Todo = (props: ITodoProps) => {
     <Box>
       <ListItem
         mt={1}
-      //as={motion.div}
-      //initial={{ opacity: 0, scale: 0 }}
-      //animate={{ opacity: 1, scale: 1 }}
-      //exit={{ opacity: 0, scale: 0 }}
+        as={motion.div}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0 }}
       >
         <Box display="flex" className="TodoLine" ml={todo.indent * 8}>
           <Box w="100%" onClick={() => toggleCompleted(todo.id)}>
@@ -118,6 +111,13 @@ const Todo = (props: ITodoProps) => {
       </ListItem>
     </Box>
   )
+}
+
+interface ITodoProps {
+  todo: ITodo
+  removeTodo: (id: string) => void
+  toggleCompleted: (id: string) => void
+  openSubForm: (id: string) => void
 }
 
 export default Todo

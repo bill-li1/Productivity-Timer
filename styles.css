@@ -5,3 +5,15 @@
 .TodoLine:hover .Buttons {
   display: flex;
 }
+
+.Logo {
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  padding: 10px;
+}
+
+.Logo:hover .LogoIcon {
+  display: flex;
+  transform: rotate(20deg);
+}

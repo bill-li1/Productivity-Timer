@@ -1,13 +1,10 @@
-import {
-  Switch,
-  Box,
-  Tooltip,
-} from "@chakra-ui/react"
+import { Switch, Box, Tooltip } from "@chakra-ui/react"
 import { InfoIcon } from "@chakra-ui/icons"
 import { TimerSettingProps } from "../../util/types"
 
 const QuoteSetting = (props: TimerSettingProps) => {
   const { timerSettings, setTimerSettings } = props
+
   return (
     <Box display="flex" justifyContent="center">
       <Box p="4" pl="9" pr="10" display="flex" mb="2" w="90%">

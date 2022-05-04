@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Input } from "@chakra-ui/react"
+import { Input, useColorModeValue } from "@chakra-ui/react"
 import { ITodo } from "../../util/types"
 import { v4 as uuidv4 } from "uuid"
 
@@ -43,10 +43,14 @@ const TodoForm = (props: ITodoFormProps) => {
         name="task"
         variant="unstyled"
         placeholder="Enter a new task..."
+        _placeholder={{
+          opacity: 0.5,
+          color: useColorModeValue("gray.800", "gray.300"),
+        }}
         value={todo.description}
         onChange={handleInputChange}
       />
-    </form >
+    </form>
   )
 }
 

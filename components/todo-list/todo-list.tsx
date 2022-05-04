@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect, useRef } from "react"
-import { Box, Fade, List, Text, Divider } from "@chakra-ui/react"
+import { Box, List, Text, Divider } from "@chakra-ui/react"
 import { SettingContext } from "../../pages"
 import { ITodo } from "../../util/types"
 import Todo from "./todo"
@@ -24,6 +24,7 @@ const TodoList = () => {
   const [todos, setTodos] = useState<ITodo[]>([])
   const [subFormOpen, setSubFormOpen] = useState<boolean>(false)
   const [subFormPosition, setSubFormPosition] = useState<string>("")
+  const [subFormTask, setSubFormTask] = useState<string>("")
   const [checkedTodos, setCheckedTodos] = useState<number>(0)
   const subFormIndent = useRef<number>(0)
 
@@ -37,17 +38,20 @@ const TodoList = () => {
   }
 
   const openSubForm = (id: string) => {
-    if (id === subFormPosition && subFormOpen) {
+    if (id === subFormTask && subFormOpen) {
       setSubFormOpen(false)
     } else {
       setSubFormOpen(true)
+      setSubFormTask(id)
+      setSubFormPosition(id)
       const start = findPos(id)
       const indent = todos[start].indent
       subFormIndent.current = indent + 1
-      setSubFormPosition(id)
       for (let i = start + 1; i < todos.length; i++) {
         if (todos[i].indent > indent) {
           setSubFormPosition(todos[i].id)
+        } else {
+          break
         }
       }
     }
@@ -62,7 +66,7 @@ const TodoList = () => {
 
   const removeTodo = (id: string) => {
     let start = findPos(id)
-    let end = start
+    let end = todos.length
     const indent = todos[start].indent
     for (let i = start + 1; i < todos.length; i++) {
       if (todos[i].indent <= indent) {
@@ -92,15 +96,17 @@ const TodoList = () => {
 
   // local storage useEffects
   useEffect(() => {
-    const storageTodos = JSON.parse(localStorage.getItem(TODO_LOCAL_STORAGE_KEY))
+    const storageTodos = JSON.parse(
+      localStorage.getItem(TODO_LOCAL_STORAGE_KEY),
+    )
     if (storageTodos) {
       setTodos(storageTodos)
     }
   }, [])
 
   useEffect(() => {
-    localStorage.setItem(TODO_LOCAL_STORAGE_KEY, JSON.stringify(todos));
-  }, [todos]);
+    localStorage.setItem(TODO_LOCAL_STORAGE_KEY, JSON.stringify(todos))
+  }, [todos])
 
   return (
     <Box mt={timerSettings.hideQuote ? 12 : 8}>
@@ -113,14 +119,14 @@ const TodoList = () => {
       <List mt={todos.length > 0 ? 2 : 0}>
         <AnimatePresence>
           {todos.map((todo: ITodo) => (
-            <Fade key={todo.id} in={true} unmountOnExit={true}>
-              <Box key={todo.id}>
-                <Todo
-                  todo={todo}
-                  removeTodo={removeTodo}
-                  toggleCompleted={toggleCompleted}
-                  openSubForm={openSubForm}
-                />
+            <Box key={todo.id}>
+              <Todo
+                todo={todo}
+                removeTodo={removeTodo}
+                toggleCompleted={toggleCompleted}
+                openSubForm={openSubForm}
+              />
+              <AnimatePresence>
                 {subFormOpen && subFormPosition === todo.id ? (
                   <Box ml={subFormIndent.current * 8}>
                     <SubForm
@@ -131,14 +137,14 @@ const TodoList = () => {
                     />
                   </Box>
                 ) : null}
-              </Box>
-            </Fade>
+              </AnimatePresence>
+            </Box>
           ))}
         </AnimatePresence>
       </List>
       <TodoForm addTodo={addTodo} todoPos={todos.length} />
       <Footer numTodos={todos.length - checkedTodos} />
-    </Box >
+    </Box>
   )
 }
 

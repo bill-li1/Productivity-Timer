@@ -10,7 +10,7 @@ const Footer = () => {
       position="absolute"
       bottom="2"
     >
-      &copy; {new Date().getFullYear()} Bill Li. All Rights Reserved.
+      &copy; {new Date().getFullYear()} Productivity Timer. All Rights Reserved.
     </Text>
   )
 }

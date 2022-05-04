@@ -1,14 +1,8 @@
+import { useColorModeValue, Input, Box, Text } from "@chakra-ui/react"
 import { useState } from "react"
-import { Input, Box, Text } from "@chakra-ui/react"
-import { ITodo } from "../../util/types"
 import { v4 as uuidv4 } from "uuid"
-
-interface ISubFormProps {
-  addTodo: (todo: ITodo, id: string) => void
-  indent: number
-  prevId: string
-  setSubForm: React.Dispatch<React.SetStateAction<boolean>>
-}
+import { ITodo } from "../../util/types"
+import { motion } from "framer-motion"
 
 const SubForm = (props: ISubFormProps) => {
   const { addTodo, indent, prevId, setSubForm } = props
@@ -37,7 +31,14 @@ const SubForm = (props: ISubFormProps) => {
 
   return (
     <form onSubmit={handleSubmit} autoComplete="off">
-      <Box display="flex" mt={1}>
+      <Box
+        display="flex"
+        mt={1}
+        as={motion.div}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transitionDuration="15ms"
+      >
         <Text fontSize={18} mr={2}>
           &#8226;
         </Text>
@@ -47,13 +48,24 @@ const SubForm = (props: ISubFormProps) => {
           type="text"
           name="task"
           variant="unstyled"
-          placeholder="New Task"
+          placeholder="Enter a new subtask..."
+          _placeholder={{
+            opacity: 0.5,
+            color: useColorModeValue("gray.800", "gray.300"),
+          }}
           value={todo.description}
           onChange={handleInputChange}
         />
       </Box>
     </form>
   )
+}
+
+interface ISubFormProps {
+  addTodo: (todo: ITodo, id: string) => void
+  indent: number
+  prevId: string
+  setSubForm: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default SubForm

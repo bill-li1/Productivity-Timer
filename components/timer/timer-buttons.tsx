@@ -12,16 +12,16 @@ import {
   ModalContent,
   useDisclosure,
 } from "@chakra-ui/react"
-import React, { useContext, useState, useEffect, useRef } from "react"
-import Timer from "easytimer.js"
 import {
   BsFillPlayCircleFill,
   BsFillPauseCircleFill,
   BsFillSkipEndFill,
 } from "react-icons/bs"
+import { useContext, useState, useEffect, useRef } from "react"
 import { VscDebugRestart } from "react-icons/vsc"
 import { SettingContext } from "../../pages"
 import { motion } from "framer-motion"
+import Timer from "easytimer.js"
 
 const TimerButtons = (props: TimerButtonProps) => {
   const { timerSettings } = useContext(SettingContext)
@@ -32,6 +32,7 @@ const TimerButtons = (props: TimerButtonProps) => {
     setNotStarted,
     timerType,
     setTimerType,
+    longBreakCounter,
   } = props
   const latest = useRef<string>("restart")
   const [timerButton, setTimerButton] = useState<string>(
@@ -58,10 +59,17 @@ const TimerButtons = (props: TimerButtonProps) => {
       }
     } else {
       if (timerType === "Pomodoro") {
-        setTimerType("Short Break")
-      } else if (timerType === "Short Break") {
-        setTimerType("Long Break")
+        longBreakCounter.current++
+        if (longBreakCounter.current === timerSettings.numBreaks) {
+          longBreakCounter.current = 0
+          setTimerType("Long Break")
+        } else {
+          setTimerType("Short Break")
+        }
       } else if (timerType === "Long Break") {
+        longBreakCounter.current = 0
+        setTimerType("Pomodoro")
+      } else {
         setTimerType("Pomodoro")
       }
     }
@@ -86,10 +94,17 @@ const TimerButtons = (props: TimerButtonProps) => {
       }
     } else {
       if (timerType === "Pomodoro") {
-        setTimerType("Short Break")
-      } else if (timerType === "Short Break") {
-        setTimerType("Long Break")
+        longBreakCounter.current++
+        if (longBreakCounter.current === timerSettings.numBreaks) {
+          longBreakCounter.current = 0
+          setTimerType("Long Break")
+        } else {
+          setTimerType("Short Break")
+        }
       } else if (timerType === "Long Break") {
+        longBreakCounter.current = 0
+        setTimerType("Pomodoro")
+      } else {
         setTimerType("Pomodoro")
       }
     }
@@ -114,10 +129,6 @@ const TimerButtons = (props: TimerButtonProps) => {
   useEffect(() => {
     setTimerButton(timer.isRunning() ? "Pause" : "Start")
   }, [timer.isRunning(), timer.isPaused()])
-
-  useEffect(() => {
-    console.log(latest.current)
-  }, [latest.current])
 
   return (
     <Box display="flex" justifyContent="center">
@@ -196,15 +207,17 @@ const TimerButtons = (props: TimerButtonProps) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Stop Timer Early?</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>random text aha blah blah blah.</ModalBody>
+          <ModalBody>
+            This session will not be counted in the report.{" "}
+          </ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
+              Cancel
             </Button>
             <Button variant="solid" onClick={modalSubmit}>
-              Reset
+              Confirm
             </Button>
           </ModalFooter>
         </ModalContent>
@@ -220,6 +233,7 @@ interface TimerButtonProps {
   setNotStarted: React.Dispatch<React.SetStateAction<boolean>>
   timerType: string
   setTimerType: React.Dispatch<React.SetStateAction<string>>
+  longBreakCounter: React.MutableRefObject<number>
 }
 
 export default TimerButtons

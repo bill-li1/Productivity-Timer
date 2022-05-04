@@ -1,17 +1,23 @@
-import { Box, useColorModeValue } from "@chakra-ui/react"
 import { useEffect, useState, useRef, useContext } from "react"
-import useTimer from "easytimer-react-hook"
+import { Box, useColorModeValue } from "@chakra-ui/react"
+import { SettingContext } from "../../pages"
+import { Howl } from "howler"
 import TimerDisplay from "./timer-display"
 import TimerSelector from "./timer-selector"
 import TimerButtons from "./timer-buttons"
-import { SettingContext } from "../../pages"
+import useTimer from "easytimer-react-hook"
 
 const Timer = () => {
   const { timerSettings } = useContext(SettingContext)
   const [notStarted, setNotStarted] = useState<boolean>(true)
   const [timer, isTargetAchieved] = useTimer({ updateWhenTargetAchieved: true })
+  const [timerType, setTimerType] = useState<string>("Pomodoro")
   const longBreakCounter = useRef<number>(0)
   const skipFirstRender = useRef<boolean>(false)
+
+  const timerSound = new Howl({
+    src: "/audio/timer.wav",
+  })
 
   const returnTime = (timerType: string) => {
     switch (timerType) {
@@ -23,8 +29,6 @@ const Timer = () => {
         return timerSettings.longBreakTime
     }
   }
-
-  const [timerType, setTimerType] = useState<string>("Pomodoro")
 
   useEffect(() => {
     timer.stop()
@@ -55,6 +59,7 @@ const Timer = () => {
 
   useEffect(() => {
     if (skipFirstRender.current) {
+      timerSound.play()
       if (timerType === "Pomodoro") {
         longBreakCounter.current++
         if (longBreakCounter.current === timerSettings.numBreaks) {
@@ -94,6 +99,7 @@ const Timer = () => {
           setNotStarted={setNotStarted}
           timerType={timerType}
           setTimerType={setTimerType}
+          longBreakCounter={longBreakCounter}
         />
       </Box>
     </Box>

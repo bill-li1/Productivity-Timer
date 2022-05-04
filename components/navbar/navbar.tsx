@@ -1,4 +1,3 @@
-import Logo from "./logo"
 import {
   Spacer,
   Container,
@@ -6,13 +5,12 @@ import {
   Heading,
   useColorModeValue,
 } from "@chakra-ui/react"
+import Logo from "./logo"
 import Information from "./information"
 import Settings from "../settings/settings"
 import Profile from "./profile"
-// import ComingSoon from "./coming-soon"
 
 const Navbar = () => {
-
   return (
     <Box
       as="nav"
@@ -24,14 +22,14 @@ const Navbar = () => {
       <Container
         display="flex"
         borderBottom="1.25px solid gray"
-        pt={2}
-        pb={2}
+        pt="5px"
+        pb="5px"
         pl={0}
         maxW="container.sm"
       >
         <Heading
           position="absolute"
-          pt="6px"
+          pt="2px"
           as="h1"
           size="lg"
           letterSpacing={"tighter"}
@@ -44,8 +42,8 @@ const Navbar = () => {
           <Settings />
           <Profile />
         </Box>
-      </Container >
-    </Box >
+      </Container>
+    </Box>
   )
 }
 

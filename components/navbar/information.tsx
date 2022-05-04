@@ -1,9 +1,6 @@
 import {
-  Container,
   Heading,
   Link,
-  Button,
-  ModalFooter,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -15,7 +12,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react"
 import { BsFillInfoCircleFill } from "react-icons/bs"
-import StyledDivider from '../styled-divider'
+import StyledDivider from "../styled-divider"
 import styled from "@emotion/styled"
 
 const Paragraph = styled.p`
@@ -43,64 +40,68 @@ const Information = () => {
         variant="outline"
         bg={useColorModeValue("whiteAlpha.800", "whiteAlpha.300")}
       />
-      <Modal size="2xl" isOpen={isOpen} onClose={onClose}>
+      <Modal size="5xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader fontSize="34" textAlign="center">
-            An Timer to boost your productivity
+          <ModalHeader fontSize="34" textAlign="center" mr={20} ml={20} p={5}>
+            A Productivity Timer to Help Get Things Done
           </ModalHeader>
           <ModalCloseButton />
           <Box>
             <StyledDivider />
-            <Container pb={6} pt={2} maxW="container.sm">
+            <Box pl={16} pr={16} pt={2} pb={12} maxW="container.lg">
               <Box>
                 <Heading pb={3} as="h3" variant="section-title">
-                  What is Pomofocus?
+                  Inspiration Behind the Timer
                 </Heading>
                 <IndentedParagraph>
-                  Pomofocus is a customizable pomodoro timer that works on
-                  desktop & mobile browser. The aim of this app is to help you
-                  focus on any task you are working on, such as study, writing,
-                  or coding. This app is inspired by the{" "}
-                  <Link href="https://illust.odoruinu.net/" target="_blank">
+                  Productivity Timer is a modern pomodoro timer that helps you
+                  focus on any task you wish to get done, whether it be
+                  studying, coding, or reading. This app allows you to be more
+                  productive, more prolific, and more proficient than ever
+                  before by leveraging the{" "}
+                  <Link href="https://en.wikipedia.org/wiki/Pomodoro_Technique">
                     Pomodoro Technique
                   </Link>{" "}
-                  which is a time management method developed by Francesco
-                  Cirillo.
+                  &#8211; a time management system that encourages people to
+                  work <i>with</i> the time they have &#8211; rather than
+                  against it.
                 </IndentedParagraph>
               </Box>
               <Box>
                 <Heading pt={3} pb={3} as="h3" variant="section-title">
-                  What is Pomodoro Technique?
+                  The Pomodoro Technique
                 </Heading>
                 <IndentedParagraph>
-                  The Pomodoro Technique is created by Francesco Cirillo for a
-                  more productive way to work and study. The technique uses a
-                  timer to break down work into intervals, traditionally 25
-                  minutes in length, separated by short breaks. Each interval is
-                  known as a pomodoro, from the Italian word for 'tomato', after
-                  the tomato-shaped kitchen timer that Cirillo used as a
-                  university student. -{" "}
-                  <Link href="https://illust.odoruinu.net/" target="_blank">
-                    Wikipedia
-                  </Link>
+                  The pomodoro technique breaks your workday into 25 minute
+                  sections separated by 5 minute breaks. Each 30 minute interval
+                  is referred to as a pomodoro. After about three or four
+                  pomodoros, you can take a longer break of around 15 or 20
+                  minutes. The philosophy behind the technique is that the timer
+                  instills a sense of urgency. Rather than feeling like you have
+                  endless time in the day to get things done and then ultimately
+                  wasting those precious work hours on distractions, you know
+                  you only have 25 minutes to make as much progress on a task as
+                  possible.
                 </IndentedParagraph>
               </Box>
               <Box>
                 <Heading pt={3} pb={3} as="h3" variant="section-title">
-                  How to use the Pomodoro Timer?
+                  Main Features
                 </Heading>
                 <Paragraph>
-                  1. Add tasks to work on today <br /> 2. Set estimate pomodoros
-                  (1 = 25min of work) for each tasks <br /> 3. Select a task to
-                  work on
-                  <br /> 4. Start timer and focus on the task for 25 minutes{" "}
+                  &#8211;&nbsp;&nbsp; Customizable timer intervals to best suit
+                  your working style. <br /> &#8211;&nbsp;&nbsp; Audio
+                  notifications at the end of each timer interval.
+                  <br /> &#8211;&nbsp;&nbsp; Built in todo list with ability to
+                  add subtasks.
+                  <br /> &#8211;&nbsp;&nbsp; Clean and intuitive user interface
+                  with customizable colors.
                   <br />
-                  5. Take a break for 5 minutes when the alarm ring <br />
-                  6. Iterate 3-5 until you finish the tasks <br />
+                  &#8211;&nbsp;&nbsp; Built in activity tracker (coming soon!)
                 </Paragraph>
               </Box>
-            </Container>
+            </Box>
           </Box>
         </ModalContent>
       </Modal>

@@ -9,7 +9,7 @@ const Website = ({ Component, pageProps, router }: AppProps) => {
   return (
     <ChakraProvider theme={theme}>
       <Fonts />
-      <Layout router={router}>
+      <Layout>
         <Component {...pageProps} key={router.route} />
       </Layout>
     </ChakraProvider>

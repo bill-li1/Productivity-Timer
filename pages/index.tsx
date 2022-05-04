@@ -10,9 +10,9 @@ export const SettingContext = createContext<ITimerContext | null>(null)
 
 const Page = () => {
   const initialTimerSettings: ITimerSettings = {
-    pomodoroTime: 45,
+    pomodoroTime: 25,
     shortBreakTime: 5,
-    longBreakTime: 10,
+    longBreakTime: 15,
     numBreaks: 3,
     autoStartPomodoro: false,
     autoStartShortTimer: false,

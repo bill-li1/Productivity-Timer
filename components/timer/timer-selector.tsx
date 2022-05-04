@@ -13,14 +13,15 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react"
 import { useRef, useContext, useEffect } from "react"
-import Timer from "easytimer.js"
 import { SettingContext } from "../../pages"
+import Timer from "easytimer.js"
 
 const TimerSelector = (props: TimerSelectorProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { timerSettings } = useContext(SettingContext)
   const { timerType, setTimerType, timer } = props
   const tempTimer = useRef<string>(timerType)
+
   const returnColor = (timerType: string) => {
     switch (timerType) {
       case "Pomodoro":
@@ -162,15 +163,18 @@ const TimerSelector = (props: TimerSelectorProps) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Stop Timer Early?</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>random text aha blah blah blah.</ModalBody>
+          <ModalBody>
+            This session will not be counted in the report and will not qualify
+            towards the long break.
+          </ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={modalClose}>
-              Close
+              Cancel
             </Button>
             <Button variant="solid" onClick={modalSubmit}>
-              Reset
+              Confirm
             </Button>
           </ModalFooter>
         </ModalContent>

@@ -1,41 +1,20 @@
-import Link from "next/link"
-import Image from "next/image"
-import { Text, useColorModeValue } from "@chakra-ui/react"
-import styled from "@emotion/styled"
-
-const LogoBox = styled.span`
-  font-weight: bold;
-  font-size: 18px;
-  display: inline-flex;
-  align-items: center;
-  height: 30px;
-  line-height: 20px;
-  padding: 10px;
-
-  &:hover img {
-    transform: rotate(20deg);
-  }
-`
+import { Text, Box, useColorModeValue } from "@chakra-ui/react"
+import { BsAlarmFill } from "react-icons/bs"
 
 const Logo = () => {
-  const footPrintImg = `/images/footprint${useColorModeValue("", "-dark")}.png`
   return (
-    <Link href="/">
-      <a>
-        <LogoBox>
-          <Image src={footPrintImg} width={20} height={20} alt="logo" />
-          <Text
-            color={useColorModeValue("gray.800", "whiteAlpha.900")}
-            fontFamily="M PLUS Rounded 1c"
-            fontWeight="bold"
-            letterSpacing={0.25}
-            ml={1.5}
-          >
-            Pomodoro Timer
-          </Text>
-        </LogoBox>
-      </a>
-    </Link>
+    <Box className="Logo">
+      <BsAlarmFill className="LogoIcon" />
+      <Text
+        color={useColorModeValue("gray.800", "whiteAlpha.900")}
+        fontFamily="M PLUS Rounded 1c"
+        fontWeight="bold"
+        letterSpacing={0.25}
+        ml={1.5}
+      >
+        Productivity Timer
+      </Text>
+    </Box>
   )
 }
 

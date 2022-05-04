@@ -1,5 +1,3 @@
-import { TimerSettingProps } from "../../util/types"
-import { useState, useEffect } from "react"
 import {
   Box,
   Table,
@@ -15,6 +13,8 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from "@chakra-ui/react"
+import { TimerSettingProps } from "../../util/types"
+import { useState, useEffect } from "react"
 import ColorSelector from "./color-selector"
 
 const TimerSetting = (props: TimerSettingProps) => {
@@ -68,7 +68,7 @@ const TimerSetting = (props: TimerSettingProps) => {
                 onChange={(num) => {
                   setTimerSettings({
                     ...timerSettings,
-                    pomodoroTime: num
+                    pomodoroTime: num,
                   })
                 }}
                 max={999}
