@@ -50,7 +50,7 @@ const Profile = () => {
                 activity.
               </Paragraph>
               <Paragraph>
-                We're worknig hard to finish the development of this feature.
+                We're working hard to finish the development of this feature.
               </Paragraph>
             </Container>
           </Box>
