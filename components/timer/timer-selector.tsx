@@ -166,8 +166,7 @@ const TimerSelector = (props: TimerSelectorProps) => {
           <ModalHeader>Stop Timer Early?</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            This session will not be counted in the report and will not qualify
-            towards the long break.
+            This session will not be counted in the report.{" "}
           </ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={modalClose}>
