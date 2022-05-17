@@ -3,5 +3,5 @@
   <br>
 </h1>
 Productivity Timer is a modern pomodoro timer that helps you focus on any task you wish to get done, whether it be studying or coding. Built using Next.js, Chakra UI and Framer Motion, it features extensive user customization, a stunning UI and silky smooth animations.
-
+<br>
 ![image](public/card.png)
